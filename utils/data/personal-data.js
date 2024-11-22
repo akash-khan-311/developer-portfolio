@@ -12,8 +12,6 @@ export const personalData = {
   linkedIn: "https://www.linkedin.com/in/md-akash-ali-9585a02a0/",
   twitter: "https://x.com/AkashKhan334",
   stackOverflow: "https://stackoverflow.com/users/21331540/akash-khan",
-  leetcode: "https://leetcode.com/said3812/",
-  devUsername: "said7388",
   resume:
     "https://drive.google.com/file/d/1bU8av2S-aOFs1mnjdqHzXiRM0-qcVs9Z/view?usp=sharing",
 };

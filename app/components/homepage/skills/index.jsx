@@ -6,7 +6,6 @@ import Image from "next/image";
 import Marquee from "react-fast-marquee";
 
 function Skills() {
-  console.log(skillsData);
   return (
     <div
       id="skills"

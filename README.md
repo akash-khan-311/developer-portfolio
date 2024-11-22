@@ -28,10 +28,9 @@ This is my personal portfolio website, built using **Next.js**. It showcases my 
 
 ```plaintext
 📁 my-portfolio
+├── 📁 app
 ├── 📁 public          # Static assets (images, favicon, etc.)
-├── 📁 components      # Reusable React components
-├── 📁 pages           # Next.js pages (routes)
-├── 📁 styles          # Global styles and Tailwind configuration
+├── 📁 components      # Reusable React components          # Next.js pages (routes)
 ├── 📄 next.config.js  # Next.js configuration file
 └── 📄 package.json    # Project dependencies and scripts
 ```
@@ -39,7 +38,7 @@ This is my personal portfolio website, built using **Next.js**. It showcases my 
 ## 🌐 Live Demo
 
 Check out the live version of my portfolio:
-[My Portfolio](https://nextjs.org/)
+[My Portfolio](https://akash-khan-2.vercel.app/)
 
 ## 📧 Contact
 
@@ -51,4 +50,23 @@ Feel free to reach out to me for collaboration or inquiries:
 - **LinkedIn:** [Linkedin](https://www.linkedin.com/in/md-akash-ali-9585a02a0/)
 - **GitHub:** [@akash-khan-311](https://github.com/akash-khan-311)
 - **Twitter:** [@AkashKhan334](https://x.com/AkashKhan334)
-# developer-portfolio
+
+## Clone and Customize
+
+If you like this portfolio and want to use it for your own purposes, feel free to clone the repository and make changes to fit your needs. Follow these steps to get started:
+
+### Steps to Clone and Use
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/akash-khan-311/developer-portfolio.git
+   ```
+
+   ```bash
+   cd developer-portfolio
+   ```
+
+   ```bash
+   npm install
+   ```
