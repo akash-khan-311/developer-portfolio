@@ -1,5 +1,5 @@
 // @flow strict
-
+import { FlipWords } from "@/components/ui/flip-words";
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +10,13 @@ import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
 
 function HeroSection() {
+  const words1 = ["Akash Khan"];
+  const words2 = [
+    "MERN Stack Developer",
+    "Web Developer",
+    "React Developer",
+    "NextJS Developer",
+  ];
   return (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
       <Image
@@ -24,9 +31,15 @@ function HeroSection() {
         <div className="order-2 lg:order-1 flex flex-col items-start justify-center p-2 pb-20 md:pb-10 lg:pt-10">
           <h1 className="text-3xl font-bold leading-10 text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[3.5rem]">
             Hello, <br />
-            This is <span className=" text-pink-500">{personalData.name}</span>
-            {` , I'm a Professional `}
-            <span className=" text-[#16f2b3]">{personalData.designation}</span>.
+            This is
+            <span>
+              <FlipWords words={words1} />
+            </span>
+            <br />
+            <span className=" text-white">
+              {`I'm a `}
+              <FlipWords words={words2} className="text-[#16f2b3]" />
+            </span>
           </h1>
 
           <div className="my-12 flex items-center gap-5">
@@ -51,13 +64,7 @@ function HeroSection() {
             >
               <FaFacebook size={30} />
             </Link>
-            <Link
-              href={personalData.leetcode}
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <SiLeetcode size={30} />
-            </Link>
+
             <Link
               href={personalData.twitter}
               target="_blank"

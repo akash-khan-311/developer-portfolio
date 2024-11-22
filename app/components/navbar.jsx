@@ -9,7 +9,7 @@ function Navbar() {
         <div className="flex flex-shrink-0 items-center">
           <Link
             href="/"
-            className=" text-[#16f2b3] text-3xl font-bold uppercase"
+            className=" text-[#16f2b3] text-xl md:text-2xl lg:text-3xl font-bold uppercase"
           >
             akash khan
           </Link>
