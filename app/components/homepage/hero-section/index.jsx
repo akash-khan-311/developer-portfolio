@@ -18,7 +18,7 @@ function HeroSection() {
   ];
   return (
     <section
-      id="home"
+      id="/"
       className="relative flex flex-col items-center justify-between py-4 lg:py-12 mt-20"
     >
       <Image

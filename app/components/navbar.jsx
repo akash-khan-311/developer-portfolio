@@ -58,7 +58,7 @@ function Navbar() {
 
         <ul className="hidden lg:flex h-screen max-h-0 w-full flex-col items-start md:h-auto md:max-h-screen md:w-auto md:flex-row md:space-x-4 md:opacity-100">
           {[
-            { id: "home", name: "Home" },
+            { id: "/", name: "Home" },
             { id: "about", name: "About" },
             { id: "experience", name: "Experience" },
             { id: "skills", name: "Skills" },
@@ -66,10 +66,10 @@ function Navbar() {
             { id: "education", name: "Education" },
             { id: "contact", name: "Contact" },
           ].map((link) => (
-            <li key={link.id}>
+            <li className="text-sm font-light" key={link.id}>
               <Link
-                href={`#${link.id}`}
-                className={`inline-block after:contents[""] after:block after:w-0 after:h-[2px] after:bg-[#16f2b3] after:transition-all after:duration-300 after:hover:w-full  transition-colors uppercase hover:text-[#16f2b3] px-4 py-2 ${
+                href={`${link.id === "/" ? "/" : "#" + link.id}`}
+                className={`inline-block after:contents[""] after:block after:w-0 after:h-[2px] after:bg-[#16f2b3] after:transition-all after:duration-300 after:hover:w-full  transition-colors uppercase hover:text-[#16f2b3]  p-2 ${
                   activeSection === link.id
                     ? "text-[#16f2b3] after:w-full"
                     : "white hover:text-[#16f2b3]"
