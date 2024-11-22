@@ -7,7 +7,7 @@ import Marquee from "react-fast-marquee";
 
 function Skills() {
   return (
-    <div
+    <section
       id="skills"
       className="relative z-50 border-t my-12 lg:my-24 border-[#25213b]"
     >
@@ -67,7 +67,7 @@ function Skills() {
           ))}
         </Marquee>
       </div>
-    </div>
+    </section>
   );
 }
 

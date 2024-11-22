@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const ActiveLink = ({ path, children }) => {
-  const pathname = usePathname();
-  const isActive = pathname === path;
+  const searchParams = useSearchParams();
+  const isActive = searchParams === path;
 
   return (
     <>

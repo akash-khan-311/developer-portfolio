@@ -59,7 +59,7 @@ export const projectsData = [
   },
   {
     id: 4,
-    name: "as career hub",
+    name: "AS Career Hub",
     description:
       "A React-based career hub, connecting professionals with opportunities, resources, and insights to facilitate career growth and exploration in a dynamic online environment.",
     tools: ["React", "Tailwind"],

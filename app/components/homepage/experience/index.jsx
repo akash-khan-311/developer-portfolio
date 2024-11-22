@@ -9,7 +9,7 @@ import experience from "/public/lottie/code.json";
 
 function Experience() {
   return (
-    <div
+    <section
       id="experience"
       className="relative z-50 border-t my-12 lg:my-24 border-[#25213b]"
     >
@@ -79,7 +79,7 @@ function Experience() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

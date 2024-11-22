@@ -9,7 +9,7 @@ import lottieFile from "/public/lottie/study.json";
 
 function Education() {
   return (
-    <div
+    <section
       id="education"
       className="relative z-50 border-t my-12 lg:my-24 border-[#25213b]"
     >
@@ -84,7 +84,7 @@ function Education() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
