@@ -52,7 +52,7 @@ function Navbar() {
             href="/"
             className="text-[#16f2b3] text-xl md:text-2xl lg:text-3xl font-bold uppercase"
           >
-            akash khan
+            akash <span className="text-pink-600">khan</span>
           </Link>
         </div>
 
