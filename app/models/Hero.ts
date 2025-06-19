@@ -1,16 +1,16 @@
 import mongoose, { Schema, Document, models, Model } from 'mongoose';
 
 export interface IHero extends Document {
-  title: string;
-  subtitle: string;
+  greet: string;
+  name: string;
   backgroundImage?: string;
   introText: string[];
 }
 
 
 const HeroSchema = new Schema<IHero>({
-  title: { type: String, required: true },
-  subtitle: { type: String, required: true },
+  greet: { type: String, required: true },
+  name: { type: String, required: true },
   introText: { type: [String], required: true },
    backgroundImage: { type: String, required: false },
 })

@@ -1,17 +1,19 @@
 "use client";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
+import { AnimatePresence, motion, LayoutGroup, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
+interface FlipWordsProps extends HTMLMotionProps<"div"> {
+  words: string[];
+  duration?: number;
+  className?: string;
+}
 export const FlipWords = ({
   words,
   duration = 3000,
   className,
-}: {
-  words: string[]; 
-  duration?: number;
-  className?: string;
-}) => {
+   ...props
+}: FlipWordsProps) => {
   const [currentWord, setCurrentWord] = useState(words[0]);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
@@ -57,10 +59,12 @@ export const FlipWords = ({
           scale: 2,
           position: "absolute",
         }}
+     
         className={cn(
           "z-10 inline-block relative text-left text-neutral-900 dark:text-neutral-100 px-2",
           className
         )}
+          {...(props as any)}
         key={currentWord}
       >
         {/* edit suggested by Sajal: https://x.com/DewanganSajal */}
@@ -76,6 +80,7 @@ export const FlipWords = ({
             className={`inline-block whitespace-nowrap ${
               className ? className : "text-pink-500"
             }`}
+             {...(props as any)}
           >
             {word.split("").map((letter, letterIndex) => (
               <motion.span
@@ -87,6 +92,7 @@ export const FlipWords = ({
                   duration: 0.2,
                 }}
                 className="inline-block"
+                {...(props as any)}
               >
                 {letter}
               </motion.span>

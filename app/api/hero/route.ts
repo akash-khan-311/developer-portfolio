@@ -12,14 +12,39 @@ export async function GET() {
 }
 
 export async function PUT(req: NextRequest) {
-  await connectDB();
-  const body = await req.json();
+  try {
+    await connectDB();
+    const body = await req.json();
 
-  // ✅ Correct typing here
-  const updated = await Hero.findOneAndUpdate({}, body, {
-    new: true,
-    upsert: true,
-  }).lean(); // 👈 optional, removes mongoose instance overhead
+    const { greet, name, introText, backgroundImage } = body;
 
-  return NextResponse.json(updated);
+    if (!greet || !name || !introText || introText.length < 2) {
+      return NextResponse.json(
+        { error: "Invalid data. Required fields missing." },
+        { status: 400 }
+      );
+    }
+
+    const updatedHero = await Hero.findOneAndUpdate(
+      {},
+      {
+        greet,
+        name,
+        introText,
+        backgroundImage,
+      },
+      {
+        new: true,
+        upsert: true, 
+      }
+    );
+
+    return NextResponse.json(updatedHero, { status: 200 });
+  } catch (error) {
+    console.error("Hero update failed:", error);
+    return NextResponse.json(
+      { error: "Something went wrong!" },
+      { status: 500 }
+    );
+  }
 }

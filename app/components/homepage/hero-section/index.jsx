@@ -1,4 +1,4 @@
-// @flow strict
+
 import { FlipWords } from "@/components/ui/flip-words";
 import { getHeroData } from "@/lib/getHeroData";
 import { personalData } from "@/utils/data/personal-data";
@@ -12,8 +12,9 @@ import { RiContactsFill } from "react-icons/ri";
 async function  HeroSection() {
   const data = await getHeroData();
 
-  console.log(data)
+  const {greet,introText,name,backgroundImage} = data.data;
 
+  console.log(data)
   const words1 = ["Akash Khan"];
   const words2 = [
     "MERN Stack Developer",
@@ -37,15 +38,16 @@ async function  HeroSection() {
       <div className="flex flex-col items-start lg:flex-row lg:gap-12 gap-y-8">
         <div className="xl:w-3/4 w-full flex flex-col items-start justify-center p-2 pb-20 md:pb-10 lg:pt-10">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold  text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[3.5rem]">
-            Hello, <br />
+            {greet}, <br />
             This is
             <span>
-              <FlipWords words={words1} />
+              <FlipWords words={[name]} />
             </span>
             <br />
             <span className=" text-white">
               {`I'm a `}
-              <FlipWords words={words2} className="text-[#16f2b3]" />
+              <FlipWords words={introText} className="text-[#16f2b3]" />
+             
             </span>
           </h1>
 

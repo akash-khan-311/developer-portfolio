@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Turn as Hamburger } from "hamburger-react";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +13,8 @@ function Navbar() {
   const handleToggle = () => {
     setIsOpen((prevState) => !prevState);
   };
+    const pathname = usePathname();
+  const isAdmin = pathname.startsWith("/admin");
 
   const scrollHandler = () => {
     if (window.scrollY > 1) {
@@ -42,7 +45,7 @@ function Navbar() {
 
   return (
     <nav
-      className={`bg-transparent transition-all duration-500 ${
+      className={`bg-transparent transition-all duration-500 ${isAdmin && "hidden"} ${
         header && "w-full backdrop-blur-2xl bg-black/30 border-b-[#353951]"
       } z-[999] fixed w-full mx-auto text-white top-0`}
     >
