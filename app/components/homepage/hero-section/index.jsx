@@ -17,15 +17,8 @@ async function  HeroSection() {
   return (
     <section
       id="/"
-      className={`relative overflow-x-hidden  py-4 lg:py-12 flex items-center justify-center    bg-black bg-[url('https://res.cloudinary.com/dtvnmf35l/image/upload/v1750328342/jlcm8kzjp4py3hespkgp.jpg')] bg-no-repeat bg-right bg-contain h-screen w-full `}
+      className={`relative overflow-x-hidden  py-4 lg:py-12 flex items-center justify-center  bg-[url('https://res.cloudinary.com/dtvnmf35l/image/upload/v1750328342/jlcm8kzjp4py3hespkgp.jpg')] bg-no-repeat bg-right bg-contain h-screen w-full `}
     >
-      {/* <Image
-        src="/hero.svg"
-        alt="Hero"
-        width={1572}
-        height={795}
-        className="absolute -top-[98px] -z-10"
-      /> */}
 
       <div className="flex flex-col justify-start items-start lg:flex-row lg:gap-12 gap-y-8 container mx-auto">
         <div className="w-full flex flex-col items-start justify-start p-2 pb-20 md:pb-10 lg:pt-10">

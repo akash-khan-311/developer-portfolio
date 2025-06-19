@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
   // This is the root layout for the application
   return (
     <html className="scroll-smooth" lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-black`}>
         <ToastContainer />
         <header>
           <Navbar />
