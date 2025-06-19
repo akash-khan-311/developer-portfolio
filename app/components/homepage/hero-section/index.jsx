@@ -1,5 +1,6 @@
 // @flow strict
 import { FlipWords } from "@/components/ui/flip-words";
+import { getHeroData } from "@/lib/getHeroData";
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +9,11 @@ import { FaFacebook, FaTwitterSquare } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
 
-function HeroSection() {
+async function  HeroSection() {
+  const data = await getHeroData();
+
+  console.log(data)
+
   const words1 = ["Akash Khan"];
   const words2 = [
     "MERN Stack Developer",
