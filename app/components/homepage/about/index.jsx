@@ -1,10 +1,13 @@
 // @flow strict
 
 import { FlipWords } from "@/components/ui/flip-words";
+import { getAboutData } from "@/lib/getAboutData";
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 
-function AboutSection() {
+async function AboutSection() {
+  const data = await getAboutData();
+ const {description,profileImage} =  data.data;
   return (
     <section id="about" className="my-12 lg:my-16 relative">
       <div className="hidden lg:flex flex-col items-center absolute top-16 -right-8">
@@ -22,13 +25,13 @@ function AboutSection() {
             <FlipWords
               duration={500}
               className="text-white"
-              words={[personalData.description]}
+              words={[description]}
             />
           </p>
         </div>
         <div className="flex justify-center order-1 lg:order-2">
           <Image
-            src={personalData.profile}
+            src={profileImage}
             width={280}
             height={280}
             alt="Akash Khan"

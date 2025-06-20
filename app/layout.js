@@ -2,6 +2,7 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
+import { ToastContainer } from 'react-toastify';
 import "./css/card.scss";
 import "./css/globals.scss";
 import ScrollToTop from "./components/helper/scroll-to-top";
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
         <header>
           <Navbar />
         </header>
+        <ToastContainer position="bottom-right" />
         <main
           id="#home"
           className=""

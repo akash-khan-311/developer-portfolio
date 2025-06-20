@@ -10,9 +10,10 @@ import { updateHeroData } from '@/lib/updateHeroData';
 import Loader from '@/app/components/shared/Loader';
 import { THero } from '@/app/Interface/hero.interface';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 
 const AdminHeroPage = () => {
-
+ const [submitFormLoading,setSubmitFormLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [heroData, setHeroData] = useState(null);
   const [slugInput, setSlugInput] = useState('');
@@ -45,6 +46,7 @@ const AdminHeroPage = () => {
   // Fetch hero data using fetch API
   useEffect(() => {
     async function fetchHero() {
+      setLoading(true);
       try {
         const data = await getHeroData();
         const hero = data?.data;
@@ -68,6 +70,7 @@ const AdminHeroPage = () => {
           setSlug(hero?.slug || []);
 
         }
+        setLoading(false);
       } catch (error) {
         console.error('Failed to load hero data');
       }
@@ -103,7 +106,7 @@ const AdminHeroPage = () => {
       return;
     }
 
-    setLoading(true);
+    setSubmitFormLoading(true);
     try {
 
       const payload = {
@@ -114,21 +117,21 @@ const AdminHeroPage = () => {
       const result = await updateHeroData(payload)
 
       if (result?.success) {
-        console.log(result.message || "Hero section updated!");
+        toast.success(result.message || "Hero section updated!");
       } else {
-        console.error(result.message || "Update failed!");
+        toast.error(result.message || "Update failed!");
       }
 
 
     } catch (error) {
       console.error('Update failed!');
     } finally {
-      setLoading(false);
+      setSubmitFormLoading(false);
     }
   };
 
 
-  // if (!heroData) return <Loader />;
+  if (loading) return <Loader />;
   return (
     <div className=" mx-auto space-y-6">
       <h2 className="text-3xl font-bold mb-4">🦸 Edit Hero Section</h2>
@@ -220,7 +223,7 @@ const AdminHeroPage = () => {
 
         <div className="flex items-center justify-between gap-4">
           <button className="px-6 py-1 bg-green-500 rounded-md hover:bg-green-600" type="submit" disabled={loading || isSubmitting}>
-            {loading ? 'Updating...' : 'Update'}
+            {submitFormLoading ? 'Updating...' : 'Update'}
           </button>
           <Link href="/" className="px-6 py-1 bg-pink-700 rounded-md hover:bg-pink-600">
             <button >

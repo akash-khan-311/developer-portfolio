@@ -2,11 +2,8 @@ import { connectDB } from '@/app/lib/db';
 import Hero from '@/app/models/Hero';
 import { NextRequest, NextResponse } from 'next/server';
 
-
 export async function GET() {
   await connectDB();
-
-
   const data = await Hero.findOne({}).lean();
   return NextResponse.json({ success: true, message: "Hero Data Fetched", data });
 }
@@ -15,16 +12,13 @@ export async function PUT(req: NextRequest) {
   try {
     await connectDB();
     const body = await req.json();
-
     const {name,slug, socialLinks,resume } = body;
-
     if (!name || !slug  || socialLinks.length <= 0 || !resume) {
       return NextResponse.json(
         { error: "Invalid data. Required fields missing." },
         { status: 400 }
       );
     }
-
     const updatedHero = await Hero.findOneAndUpdate(
       {},
       {
