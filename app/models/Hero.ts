@@ -1,21 +1,21 @@
 import mongoose, { Schema, Document, models, Model } from 'mongoose';
-
-export interface IHero extends Document {
-  greet: string;
-  name: string;
-  backgroundImage?: string;
-  introText: string[];
-}
+import { THero } from '../Interface/hero.interface';
 
 
-const HeroSchema = new Schema<IHero>({
-  greet: { type: String, required: true },
-  name: { type: String, required: true },
-  introText: { type: [String], required: true },
-   backgroundImage: { type: String, required: false },
+
+const HeroSchema = new Schema<THero>({
+  name: {type: String, required: true},
+  slug: {type: [String], required: true},
+  socialLinks: {
+    facebook: {type: String, required: true},
+    twitter: {type: String, required: true},
+    linkedin: {type: String, required: true},
+    github: {type: String, required: true},
+  },
+  resume: {type: String, required: true},
 })
 
 
-const Hero = (mongoose.models?.Hero || mongoose.model<IHero>('Hero', HeroSchema)) as Model<IHero>;
+const Hero = (mongoose.models?.Hero || mongoose.model<THero>('Hero', HeroSchema)) as Model<THero>;
 
 export default Hero;

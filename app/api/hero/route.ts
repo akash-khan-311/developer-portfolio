@@ -16,9 +16,9 @@ export async function PUT(req: NextRequest) {
     await connectDB();
     const body = await req.json();
 
-    const { greet, name, introText, backgroundImage } = body;
+    const {name,slug, socialLinks,resume } = body;
 
-    if (!greet || !name || !introText || introText.length < 2) {
+    if (!name || !slug  || socialLinks.length <= 0 || !resume) {
       return NextResponse.json(
         { error: "Invalid data. Required fields missing." },
         { status: 400 }
@@ -28,10 +28,15 @@ export async function PUT(req: NextRequest) {
     const updatedHero = await Hero.findOneAndUpdate(
       {},
       {
-        greet,
         name,
-        introText,
-        backgroundImage,
+        slug,
+        socialLinks: {
+          facebook: socialLinks.facebook,
+          twitter: socialLinks.twitter,
+          linkedin: socialLinks.linkedin,
+          github: socialLinks.github,
+        },
+        resume,
       },
       {
         new: true,

@@ -1,8 +1,12 @@
 export const updateHeroData = async (payload: {
-  greet: string;
   name: string;
-  introText: string[];
-  backgroundImage?: string;
+  slug: string[];
+  socialLinks: {
+    facebook: string;
+    twitter: string;
+    linkedin: string;
+    github: string;
+  };
 }) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/hero`, {

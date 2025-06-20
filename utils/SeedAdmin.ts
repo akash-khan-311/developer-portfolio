@@ -12,6 +12,10 @@ export const seedAdmin = async () => {
       email: process.env.ADMIN_EMAIL,
       password: hashedPassword,
       role: "admin",
+      name: "Akash Khan",
+      profileImage: "https://res.cloudinary.com/dtvnmf35l/image/upload/v1750395704/mnxxmschlaswraivdgjm.jpg",
+      designation: ['Full Stack Developer', 'MERN Stack Developer', "Software Engineer", "Web Developer", "Frontend Developer", "Open Source Contributor"],
+      languages: ["Bangla", "English", "Hindi"],
     });
     console.log('Admin seeded');
   }

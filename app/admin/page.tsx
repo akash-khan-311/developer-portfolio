@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 
 import { redirect } from "next/navigation";
 import { authOptions } from "../lib/authOptions";
+import InfoCard from "../components/Admin/InfoCard/InfoCard";
 
 const WelcomeToAdminPanel =async () => {
 
@@ -11,9 +12,7 @@ const WelcomeToAdminPanel =async () => {
     redirect('/login')
   }
   return (
-    <div>
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white">Welcome To Admin Panel</h1>
-    </div>
+    <InfoCard/>
   );
 };
 

@@ -11,19 +11,19 @@ async function  HeroSection() {
   const data = await getHeroData();
 
   const hero = data?.data;
-
+console.log(hero)
 console.log(hero.name)
 
   return (
     <section
       id="/"
-      className={`relative overflow-x-hidden  py-4 lg:py-12 flex items-center justify-center  bg-[url('https://res.cloudinary.com/dtvnmf35l/image/upload/v1750328342/jlcm8kzjp4py3hespkgp.jpg')] bg-no-repeat bg-right bg-contain h-screen w-full `}
+      className={`relative  overflow-hidden  py-4 lg:py-12 flex items-center justify-center  bg-[url('https://res.cloudinary.com/dtvnmf35l/image/upload/v1750328342/jlcm8kzjp4py3hespkgp.jpg')] bg-no-repeat bg-right bg-contain h-screen w-full `}
     >
 
-      <div className="flex flex-col justify-start items-start lg:flex-row lg:gap-12 gap-y-8 container mx-auto">
+      <div className="flex flex-col z-50 justify-start items-start lg:flex-row lg:gap-12 gap-y-8 container mx-auto">
         <div className="w-full flex flex-col items-start justify-start p-2 pb-20 md:pb-10 lg:pt-10">
-          <h1 className="text-3xl lg:text-6xl font-bold  text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[4.5rem]">
-            {hero?.greet}, <br />
+          <h1 className="text-3xl lg:text-[72px] font-bold text-white md:font-extrabold  lg:leading-[5.5rem]">
+            Assalamu alaikum, <br />
             This is
             <span>
               <FlipWords words={([hero?.name] || ["Akash Khan"])} />
@@ -31,27 +31,27 @@ console.log(hero.name)
             <br />
             <span className=" text-white">
               {`I'm a `}
-              <FlipWords words={hero?.introText || ["Frontend Developer"]} className="text-[#16f2b3]" />
+              <FlipWords words={hero?.slug || ["Frontend Developer"]} className="text-[#16f2b3]" />
             </span>
           </h1>
 
           <div className="my-12 flex items-center gap-5">
             <Link
-              href={personalData.github}
+              href={hero?.socialLinks?.github}
               target="_blank"
               className="transition-all text-pink-500 hover:scale-125 duration-300"
             >
               <BsGithub size={30} />
             </Link>
             <Link
-              href={personalData.linkedIn}
+              href={hero?.socialLinks?.linkedin}
               target="_blank"
               className="transition-all text-pink-500 hover:scale-125 duration-300"
             >
               <BsLinkedin size={30} />
             </Link>
             <Link
-              href={personalData.facebook}
+              href={hero?.socialLinks?.facebook}
               target="_blank"
               className="transition-all text-pink-500 hover:scale-125 duration-300"
             >
@@ -59,7 +59,7 @@ console.log(hero.name)
             </Link>
 
             <Link
-              href={personalData.twitter}
+              href={hero?.socialLinks?.twitter}
               target="_blank"
               className="transition-all text-pink-500 hover:scale-125 duration-300"
             >
@@ -82,7 +82,7 @@ console.log(hero.name)
               className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold"
               role="button"
               target="_blank"
-              href={personalData.resume}
+              href={hero?.resume}
             >
               <span>Get Resume</span>
               <MdDownload size={16} />

@@ -1,8 +1,9 @@
 // app/admin/layout.tsx
 import Link from 'next/link';
 import { Inter } from "next/font/google";
-import Sidebar from '../components/Dashboard/Sidebar/Sidebar';
+
 import { ToastContainer } from 'react-toastify';
+import Sidebar from '../components/Admin/Sidebar/Sidebar';
 const inter = Inter({ subsets: ["latin"] });
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     return (

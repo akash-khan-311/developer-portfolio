@@ -1,5 +1,5 @@
+import Login from "../components/Admin/Login/Login";
 
-import Login from "../components/Dashboard/Login/Login";
 
 const LoginPage = () => {
   return (

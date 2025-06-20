@@ -8,33 +8,16 @@ import Image from 'next/image';
 import { uploadImageToCloudinary } from '@/utils/uploadImageToCloudinary';
 import { updateHeroData } from '@/lib/updateHeroData';
 import Loader from '@/app/components/shared/Loader';
+import { THero } from '@/app/Interface/hero.interface';
+import Link from 'next/link';
 
-type HeroFormValues = {
-  greet: string;
-  name: string;
-  introText: string[];
-  backgroundImage?: string;
-};
 const AdminHeroPage = () => {
 
   const [loading, setLoading] = useState(false);
   const [heroData, setHeroData] = useState(null);
-  const [introInput, setIntroInput] = useState('');
-  const [introList, setIntroList] = useState<string[]>([]);
-  // ! in from when the user upload the BG image and show the preview
-  const [previewImage, setPreviewImage] = useState(
-    "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Images.png"
-  );
+  const [slugInput, setSlugInput] = useState('');
+  const [slug, setSlug] = useState<string[]>([]);
 
-  console.log(heroData?.backgroundImage)
-  const [file, setFile] = useState<File | null>(null);
-  const loadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
-    if (selectedFile && selectedFile.type.startsWith("image/")) {
-      setPreviewImage(URL.createObjectURL(selectedFile));
-      setFile(selectedFile);
-    }
-  };
   const {
     register,
     handleSubmit,
@@ -43,12 +26,17 @@ const AdminHeroPage = () => {
     setError,
     clearErrors,
     formState: { errors, isSubmitting },
-  } = useForm<HeroFormValues>({
+  } = useForm<THero>({
     defaultValues: {
-      greet: '',
       name: '',
-      introText: [],
-      backgroundImage: '',
+      slug: [],
+      socialLinks: {
+        facebook: '',
+        twitter: '',
+        linkedin: '',
+        github: '',
+      },
+      resume: '',
     },
   });
 
@@ -67,14 +55,17 @@ const AdminHeroPage = () => {
         setHeroData(hero);
         if (hero) {
           reset({
-            greet: hero?.greet || '',
             name: hero?.name || '',
-            introText: hero?.introText || [],
-            backgroundImage: hero?.backgroundImage || '',
+            slug: hero?.slug || [],
+            socialLinks: {
+              facebook: hero?.socialLinks?.facebook || '',
+              twitter: hero?.socialLinks?.twitter || '',
+              linkedin: hero?.socialLinks?.linkedin || '',
+              github: hero?.socialLinks?.github || '',
+            },
+            resume: hero?.resume || '',
           });
-          setIntroList(hero?.introText || []);
-
-          setPreviewImage(hero?.backgroundImage);
+          setSlug(hero?.slug || []);
 
         }
       } catch (error) {
@@ -85,27 +76,27 @@ const AdminHeroPage = () => {
     fetchHero();
   }, [reset]);
   const addIntro = () => {
-    const trimmed = introInput.trim();
-    if (trimmed && !introList.includes(trimmed)) {
-      const updated = [...introList, trimmed];
-      setIntroList(updated);
-      setValue('introText', updated);
-      setIntroInput('');
+    const trimmed = slugInput.trim();
+    if (trimmed && !slug.includes(trimmed)) {
+      const updated = [...slug, trimmed];
+      setSlug(updated);
+      setValue('slug', updated);
+      setSlugInput('');
       if (updated.length >= 2) {
-        clearErrors('introText');
+        clearErrors('slug');
       }
     }
   };
 
   const removeIntro = (index: number) => {
-    const updated = introList.filter((_, i) => i !== index);
-    setIntroList(updated);
-    setValue('introText', updated);
+    const updated = slug.filter((_, i) => i !== index);
+    setSlug(updated);
+    setValue('slug', updated);
   };
   // Submit handler using fetch PUT
-  const onSubmit = async (data: HeroFormValues) => {
-    if (introList.length < 2) {
-      setError('introText', {
+  const onSubmit = async (data: THero) => {
+    if (slug.length < 2) {
+      setError('slug', {
         type: 'manual',
         message: 'At least two intro text is required',
       });
@@ -114,15 +105,10 @@ const AdminHeroPage = () => {
 
     setLoading(true);
     try {
-      let imageUrl = heroData.backgroundImage || '';
 
-      if (file) {
-        imageUrl = await uploadImageToCloudinary(file)
-      }
       const payload = {
         ...data,
-        introText: introList,
-        backgroundImage: imageUrl,
+        slug,
       };
 
       const result = await updateHeroData(payload)
@@ -142,7 +128,7 @@ const AdminHeroPage = () => {
   };
 
 
-  if (!heroData) return <Loader />;
+  // if (!heroData) return <Loader />;
   return (
     <div className=" mx-auto space-y-6">
       <h2 className="text-3xl font-bold mb-4">🦸 Edit Hero Section</h2>
@@ -151,25 +137,52 @@ const AdminHeroPage = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-4  p-6 rounded-lg shadow-md"
       >
-        <div>
-          <Field label="Greet" required error={errors.greet}>
-            <input  {...register("greet", { required: "Greet is Required" })} name='greet' type='text' id='greet' placeholder='ex: Assalamu Alaikum' className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
-          </Field>
-        </div>
 
+        {/* Name Field */}
         <div>
           <Field label="Name " required error={errors.name}>
             <input {...register("name", { required: "Name Title is Required" })} name='name' type='text' id='name' placeholder='ex: Your Name ' className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
           </Field>
         </div>
+        {/* Resume */}
+        <div>
+          <Field label="Your Resume Drive Link" required error={errors?.resume}>
+            <input {...register("resume", { required: "Resume URL is Required" })} name='resume' type='text' id='resume' placeholder='ex: https://drive.google.com/file/d/ ' className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
+          </Field>
+        </div>
+        {/* Social Field */}
+        {/* Facebook */}
+        <div>
+          <Field label="Facebook URL" required error={errors?.socialLinks?.facebook}>
+            <input {...register("socialLinks.facebook", { required: "Facebook URL is Required" })} name='socialLinks.facebook' type='text' id='facebook' placeholder='ex: https://facebook.com/your_profile_id ' className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
+          </Field>
+        </div>
+        {/* Linkdin */}
+        <div>
+          <Field label="Linkedin URL" required error={errors?.socialLinks?.linkedin}>
+            <input {...register("socialLinks.linkedin", { required: "Linkedin URL is Required" })} name='socialLinks.linkedin' type='text' id='linkedin' placeholder='ex: https://linkedin.com/your_profile_id ' className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
+          </Field>
+        </div>
+        {/* Twitter */}
+        <div>
+          <Field label="Twitter URL" required error={errors?.socialLinks?.twitter}>
+            <input {...register("socialLinks.twitter", { required: "Twitter URL is Required" })} name='socialLinks.twitter' type='text' id='twitter' placeholder='ex: https://x.com/your_profile_id ' className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
+          </Field>
+        </div>
+        {/* github */}
+        <div>
+          <Field label="Github URL" required error={errors?.socialLinks?.github}>
+            <input {...register("socialLinks.github", { required: "Github URL is Required" })} name='socialLinks.github' type='text' id='github' placeholder='ex: https://github.com/your_profile_id ' className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
+          </Field>
+        </div>
 
         {/* IntroText: Array input */}
         <div>
-          <label>Add Intro Text</label>
+          <label>Add Slug</label>
           <div className="flex gap-2">
             <input
-              value={introInput}
-              onChange={(e) => setIntroInput(e.target.value)}
+              value={slugInput}
+              onChange={(e) => setSlugInput(e.target.value)}
               placeholder="ex: web developer"
               className=' w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
             />
@@ -179,14 +192,14 @@ const AdminHeroPage = () => {
             </button>
 
           </div>
-          {errors.introText && (
+          {errors.slug && (
             <p className="text-red-500 text-sm mt-1">
-              {(errors.introText as FieldError)?.message}
+              {(errors.slug as FieldError)?.message}
             </p>
           )}
           {/* Show list */}
           <ul className="mt-2 space-y-1 inline">
-            {introList.map((text, index) => (
+            {slug.map((text, index) => (
               <li
                 key={index}
                 className=" flex items-center px-3 py-1 rounded-md"
@@ -202,42 +215,19 @@ const AdminHeroPage = () => {
               </li>
             ))}
           </ul>
-          <div className=" mt-5">
 
-            <div className="">
-              <Field
-                htmlFor="backgroundImage"
-                label="Profile Image"
-                error={errors.backgroundImage as FieldError}
-                required
-              >
-
-                <input {...register("backgroundImage", {
-                  required: "Background Image is required",
-                })} type="file"
-                  accept="image/*"
-                  onChange={loadFile} id="backgroundImage" className=" w-full cursor-pointer appearance-none rounded-md border border-gray-200 bg-slate-900 px-3 py-2 text-sm transition focus:z-10 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75" />
-
-
-              </Field>
-            </div>
-            <div className="lg:w-[300px] lg:h-[300px] mt-5">
-              <Image
-                id="preview_img"
-                className=" w-full h-full  border-2 p-1 rounded-md"
-                src={previewImage}
-                alt="Preview"
-                width={100}
-                height={100}
-              />
-            </div>
-
-          </div>
         </div>
 
-        <button className="px-6 py-1 bg-green-500 rounded-md hover:bg-green-600" type="submit" disabled={loading || isSubmitting}>
-          {loading ? 'Updating...' : 'Update'}
-        </button>
+        <div className="flex items-center justify-between gap-4">
+          <button className="px-6 py-1 bg-green-500 rounded-md hover:bg-green-600" type="submit" disabled={loading || isSubmitting}>
+            {loading ? 'Updating...' : 'Update'}
+          </button>
+          <Link href="/" className="px-6 py-1 bg-pink-700 rounded-md hover:bg-pink-600">
+            <button >
+              Preview
+            </button>
+          </Link>
+        </div>
       </form>
     </div>
   );
