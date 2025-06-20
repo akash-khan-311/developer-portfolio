@@ -5,7 +5,7 @@ export const updateHeroData = async (payload: {
   backgroundImage?: string;
 }) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/hero`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/hero`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

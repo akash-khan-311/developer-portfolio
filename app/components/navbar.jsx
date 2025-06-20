@@ -15,6 +15,7 @@ function Navbar() {
   };
     const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
+  const isLoginPage = pathname.startsWith('/login')
 
   const scrollHandler = () => {
     if (window.scrollY > 1) {
@@ -45,7 +46,7 @@ function Navbar() {
 
   return (
     <nav
-      className={`bg-transparent transition-all duration-500 ${isAdmin && "hidden"} ${
+      className={`bg-transparent transition-all duration-500 ${(isAdmin || isLoginPage) && "hidden"} ${
         header && "w-full backdrop-blur-2xl bg-black/30 border-b-[#353951]"
       } z-[999] fixed w-full mx-auto text-white top-0`}
     >

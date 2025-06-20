@@ -2,7 +2,7 @@
 import { useState } from "react";
 // Components
 import MenuItem from "./MenuItem/MenuItem";
-
+import { signOut } from "next-auth/react";
 // Icons
 import { GrLogout, GrUserExpert } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
@@ -55,19 +55,20 @@ const Sidebar = () => {
                             {/* <MenuItems /> */}
 
                             <nav>
-                                <MenuItem icon={FaHome} label={'Hero Section'} path={'/admin/hero'}  />
-                                <MenuItem icon={FcAbout} label={'About Section'} path={'/admin/about'}  />
-                                <MenuItem icon={FaCode} label={'Experience Section'} path={'/admin/experience'}  />
-                                <MenuItem icon={GiSkills} label={'Skills Section'} path={'/admin/skills'}  />
-                                <MenuItem icon={PiMonitorFill} label={'Project Section'} path={'/admin/project'}  />
-                                <MenuItem icon={FaUserGraduate} label={'Education Section'} path={'/admin/education'}  />
-                                <MenuItem icon={MdContactMail} label={'Contact Section'} path={'/admin/contact'}  />
+                                <MenuItem icon={FaHome} label={'Hero Section'} path={'/admin/hero'} />
+                                <MenuItem icon={FcAbout} label={'About Section'} path={'/admin/about'} />
+                                <MenuItem icon={FaCode} label={'Experience Section'} path={'/admin/experience'} />
+                                <MenuItem icon={GiSkills} label={'Skills Section'} path={'/admin/skills'} />
+                                <MenuItem icon={PiMonitorFill} label={'Project Section'} path={'/admin/project'} />
+                                <MenuItem icon={FaUserGraduate} label={'Education Section'} path={'/admin/education'} />
+                                <MenuItem icon={MdContactMail} label={'Contact Section'} path={'/admin/contact'} />
                             </nav>
                         </div>
                     </div>
                     <div className="">
                         <hr />
                         <button
+                            onClick={() => signOut({ callbackUrl: '/' })}
                             className="flex w-full items-center px-4 py-2  hover:backdrop-blur-sm hover:bg-white/10 text-white transition-colors duration-300 transform"
                         >
                             <GrLogout className="w-5 h-5 " />

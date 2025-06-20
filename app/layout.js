@@ -1,7 +1,5 @@
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 import "./css/card.scss";
@@ -17,10 +15,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   // This is the root layout for the application
+  
   return (
     <html className="scroll-smooth" lang="en">
       <body className={`${inter.className} bg-black`}>
-        <ToastContainer />
         <header>
           <Navbar />
         </header>

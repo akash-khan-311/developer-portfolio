@@ -1,13 +1,13 @@
 'use client';
 import { FieldError, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { getHeroData } from '@/lib/getHeroData';
 import Field from '@/app/components/shared/Form/Field';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import Image from 'next/image';
 import { uploadImageToCloudinary } from '@/utils/uploadImageToCloudinary';
 import { updateHeroData } from '@/lib/updateHeroData';
+import Loader from '@/app/components/shared/Loader';
 
 type HeroFormValues = {
   greet: string;
@@ -15,7 +15,7 @@ type HeroFormValues = {
   introText: string[];
   backgroundImage?: string;
 };
-const AdminHeroPage =  () => {
+const AdminHeroPage = () => {
 
   const [loading, setLoading] = useState(false);
   const [heroData, setHeroData] = useState(null);
@@ -25,6 +25,8 @@ const AdminHeroPage =  () => {
   const [previewImage, setPreviewImage] = useState(
     "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Images.png"
   );
+
+  console.log(heroData?.backgroundImage)
   const [file, setFile] = useState<File | null>(null);
   const loadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -57,18 +59,26 @@ const AdminHeroPage =  () => {
     async function fetchHero() {
       try {
         const data = await getHeroData();
-        setHeroData(data?.data);
-        if (data?.data) {
+        const hero = data?.data;
+        if (!hero) {
+          console.error('No hero data found');
+          return;
+        }
+        setHeroData(hero);
+        if (hero) {
           reset({
-            greet: data?.data.greet || '',
-            name: data?.data.name || '',
-            introText: (data?.data.introText || []).join('\n'),
-            backgroundImage: data?.data.backgroundImage || '',
+            greet: hero?.greet || '',
+            name: hero?.name || '',
+            introText: hero?.introText || [],
+            backgroundImage: hero?.backgroundImage || '',
           });
-          setIntroList(data?.data.introText || []);
+          setIntroList(hero?.introText || []);
+
+          setPreviewImage(hero?.backgroundImage);
+
         }
       } catch (error) {
-        toast.error('Failed to load hero data');
+        console.error('Failed to load hero data');
       }
     }
 
@@ -104,9 +114,9 @@ const AdminHeroPage =  () => {
 
     setLoading(true);
     try {
-      let imageUrl  = heroData.backgroundImage || '';
+      let imageUrl = heroData.backgroundImage || '';
 
-      if(file){
+      if (file) {
         imageUrl = await uploadImageToCloudinary(file)
       }
       const payload = {
@@ -115,21 +125,24 @@ const AdminHeroPage =  () => {
         backgroundImage: imageUrl,
       };
 
-     const result = await updateHeroData(payload)
+      const result = await updateHeroData(payload)
 
-     if (result?.success) {
-      toast.success(result.message || "Hero section updated!");
-    } else {
-      toast.error(result.message || "Update failed!");
-    }
+      if (result?.success) {
+        console.log(result.message || "Hero section updated!");
+      } else {
+        console.error(result.message || "Update failed!");
+      }
 
-      
+
     } catch (error) {
-      toast.error('Update failed!');
+      console.error('Update failed!');
     } finally {
       setLoading(false);
     }
   };
+
+
+  if (!heroData) return <Loader />;
   return (
     <div className=" mx-auto space-y-6">
       <h2 className="text-3xl font-bold mb-4">🦸 Edit Hero Section</h2>

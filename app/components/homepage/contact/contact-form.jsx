@@ -34,14 +34,14 @@ function ContactForm() {
     }
 
     try {
-      toast.success("Message sent successfully!");
+      console.log("Message sent successfully!");
       setUserInput({
         name: "",
         email: "",
         message: "",
       });
     } catch (error) {
-      toast.error("Failed to send message!");
+      console.error("Failed to send message!");
     } finally {
       setIsLoading(false);
     }

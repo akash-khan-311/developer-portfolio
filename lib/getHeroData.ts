@@ -1,12 +1,15 @@
-export const getHeroData = async () => {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/hero`, {
-      cache: 'no-store',
-    });
 
-    return res.json();
-  } catch (error) {
-    console.error('Error fetching hero data:', error);
-    return null;
+
+export const getHeroData = async () => {
+ const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/hero`,
+    {
+      cache: "no-store",
+    },
+  );
+  if (!res.ok) {
+    throw new Error('Failed to fetch hero data');
   }
+  const data = await res.json();
+  return data;
 };

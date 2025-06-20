@@ -16,6 +16,6 @@ const HeroSchema = new Schema<IHero>({
 })
 
 
-const Hero = (mongoose.models.Hero || mongoose.model<IHero>('Hero', HeroSchema)) as Model<IHero>;
+const Hero = (mongoose.models?.Hero || mongoose.model<IHero>('Hero', HeroSchema)) as Model<IHero>;
 
 export default Hero;
