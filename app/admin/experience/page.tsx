@@ -12,11 +12,18 @@ const ExperiencePage = () => {
   const [submitFormLoading, setSubmitFormLoading] = useState(false);
   const [experienceData, setExperienceData] = useState(null);
 
+  const handleExperienceUpdate = (updatedExperience) => {
+  setExperienceData((prev) =>
+    prev.map((exp) =>
+      exp._id === updatedExperience._id ? updatedExperience : exp
+    )
+  );
+};
   useEffect(() => {
     const fetchExperience = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/experience`, { cache: 'no-store' });
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/experience`);
         if (!response.ok) {
           toast.error('Failed to fetch experience data');
         }
@@ -128,7 +135,7 @@ const ExperiencePage = () => {
             loading ? <Loader/> : 
 
             experienceData?.map((data: { _id: string; company: string, role: string; endDate: string, startDate: string }) => (
-             <ExperienceCard key={data._id} data={data} />
+             <ExperienceCard  onUpdate={handleExperienceUpdate} key={data._id} data={data} />
             ))
           }
         </div>

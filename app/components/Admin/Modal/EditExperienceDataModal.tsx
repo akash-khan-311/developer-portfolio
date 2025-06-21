@@ -1,7 +1,5 @@
 'use client'
-import { getExperienceDataById } from "@/lib/getSinglExperienceData"
 import { useEffect, useState } from "react"
-import { FaEdit } from "react-icons/fa"
 import Field from "../../shared/Form/Field"
 import { useForm } from "react-hook-form"
 import { updateExperienceData } from "@/lib/updateExperienceData"
@@ -10,6 +8,7 @@ type Props = {
     modalOpen: boolean;
     data: { _id: string; company: string; role: string; startDate: Date; endDate: Date };
     setModalOpen: (open: boolean) => void;
+     onUpdate: (updatedExperience: any) => void;
 };
 interface ExperienceFormData {
     company: string;
@@ -20,7 +19,7 @@ interface ExperienceFormData {
 interface UpdateExperiencePayload extends ExperienceFormData {
     id: string;
 }
-export function ExperienceModal({ data, modalOpen, setModalOpen }: Props) {
+export function ExperienceModal({ data, modalOpen, setModalOpen,onUpdate }: Props) {
     const [loading, setLoading] = useState(false);
     console.log(data)
     const {
@@ -72,6 +71,7 @@ export function ExperienceModal({ data, modalOpen, setModalOpen }: Props) {
             }
             if (result.success) {
                 toast.success(result.message || 'Experience Updated Successfully', { position: 'bottom-right' });
+                onUpdate(result.data);
                 setLoading(false);
                 setModalOpen(false);
                 reset();

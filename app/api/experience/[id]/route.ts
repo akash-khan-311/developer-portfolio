@@ -2,12 +2,15 @@ import { connectDB } from '@/app/lib/db';
 import Experience from '@/app/models/Experience.model';
 import { NextRequest, NextResponse } from 'next/server';
 
-// GET single experience by ID
-export async function GET(props: { params: Promise<{ id: string }> }) {
-    const params = await props.params;
+// ✅ GET single experience by ID
+export async function GET(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> } // ✅ NOT Promise
+) {
+  const { id } = (await context.params);
   try {
     await connectDB();
-    const experience = await Experience.findById(params?.id).lean();
+    const experience = await Experience.findById(id).lean();
 
     if (!experience) {
       return NextResponse.json(
@@ -26,14 +29,16 @@ export async function GET(props: { params: Promise<{ id: string }> }) {
   }
 }
 
-// UPDATE experience by ID
-export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
-  const params = await props.params;
+// ✅ PATCH update experience by ID
+export async function PATCH(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = (await context.params);
+
   try {
     await connectDB();
-
     const body = await req.json();
-    console.log('Update Experience Body:', body);
     const { company, role, startDate, endDate } = body;
 
     if (!company || !role || !startDate || !endDate) {
@@ -44,7 +49,7 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
     }
 
     const updatedExperience = await Experience.findByIdAndUpdate(
-      params.id,
+      id,
       { company, role, startDate, endDate },
       { new: true }
     );

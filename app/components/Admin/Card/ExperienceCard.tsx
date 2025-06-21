@@ -3,9 +3,13 @@ import { TExperience } from "@/app/Interface/experience.interface";
 import { formatDate } from "@/utils/formatDate";
 import { FaEdit } from "react-icons/fa";
 import { ExperienceModal } from "../Modal/EditExperienceDataModal";
-import { useState } from "react";
-const ExperienceCard = ({ data }) => {
+import { useEffect, useState } from "react";
+const ExperienceCard = ({ data, onUpdate }) => {
     const [modalOpen, setModalOpen] = useState(false);
+    const [experience, setExperience] = useState(data);
+    useEffect(() => {
+        setExperience(data);
+    }, [data]);
     return (
         <div className="border rounded-lg p-5 relative">
             <div className="">
@@ -13,13 +17,23 @@ const ExperienceCard = ({ data }) => {
                 <h2 className="text-2xl font-semibold text-white uppercase">{data?.role}</h2>
                 <h3>{data?.company}</h3>
                 <button
-                onClick={() => setModalOpen(true)} 
-                    className="absolute top-3 right-3 p-3 text-xl rounded-full bg-gray-600 hover:bg-gray-800"
+                    onClick={() => setModalOpen(true)}
+                    className="absolute top-3 right-3 p-2 rounded-full bg-pink-600 hover:bg-pink-800"
                     title="Edit"
                 >
                     <FaEdit />
                 </button>
-                <ExperienceModal data={data} modalOpen={modalOpen} setModalOpen={setModalOpen} />
+                <button
+
+                    className="absolute bottom-3 right-3 p-2 rounded-full bg-red-600 hover:bg-red-800"
+                    title="Edit"
+                >
+                    <FaEdit />
+                </button>
+                <ExperienceModal onUpdate={(updatedData) => {
+                    setExperience(updatedData); 
+                    onUpdate(updatedData);     
+                }} data={data} modalOpen={modalOpen} setModalOpen={setModalOpen} />
             </div>
         </div>
     )

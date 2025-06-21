@@ -1,14 +1,10 @@
 type Props = {
   id: string;
   payload: {
-    name: string;
-    slug: string[];
-    socialLinks: {
-      facebook: string;
-      twitter: string;
-      linkedin: string;
-      github: string;
-    };
+    company: string;
+    role: string;
+    startDate: string;
+    endDate: string;
   };
 };
 
