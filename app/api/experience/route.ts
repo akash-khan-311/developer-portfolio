@@ -4,10 +4,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {
   await connectDB();
-  const data = await Experience.findOne({}).lean();
+  const data = await Experience.find({}).lean();
   return NextResponse.json({ success: true, message: "Experience Data Fetched", data });
 }
-
 export async function PUT(req: NextRequest) {
   try {
     await connectDB();
