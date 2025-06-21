@@ -1,7 +1,3 @@
-
-
-
-
 export type TExperience = {
     company: string;
     role: string;
