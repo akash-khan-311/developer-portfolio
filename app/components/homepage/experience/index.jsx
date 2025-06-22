@@ -1,13 +1,17 @@
 // @flow strict
-
-import { experiences } from "@/utils/data/experience";
 import Image from "next/image";
 import { BsPersonWorkspace } from "react-icons/bs";
 import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import experience from "/public/lottie/code.json";
+import { getExperienceData } from "@/lib/getExperienceData";
+import { formatDate } from '@/utils/formatDate';
 
-function Experience() {
+async function Experience() {
+  const result = await getExperienceData()
+  console.log('this is for expericen index',result)
+
+  const experiences = result?.data || [];
   return (
     <section
       id="experience"
@@ -43,8 +47,8 @@ function Experience() {
             <div className="flex flex-col gap-6">
               {experiences.map((experience) => (
                 <GlowCard
-                  key={experience.id}
-                  identifier={`experience-${experience.id}`}
+                  key={experience?._id}
+                  identifier={`experience-${experience?._id}`}
                 >
                   <div className="p-3 relative">
                     <Image
@@ -56,7 +60,7 @@ function Experience() {
                     />
                     <div className="flex justify-center">
                       <p className="text-xs sm:text-sm text-[#16f2b3]">
-                        {experience.duration}
+                        {formatDate(experience?.startDate)} {formatDate(experience?.endDate)}
                       </p>
                     </div>
                     <div className="flex items-center gap-x-8 px-3 py-5">
@@ -65,10 +69,10 @@ function Experience() {
                       </div>
                       <div>
                         <p className="text-base sm:text-xl mb-2 font-medium uppercase">
-                          {experience.title}
+                          {experience?.role}
                         </p>
                         <p className="text-sm sm:text-base">
-                          {experience.company}
+                          {experience?.company}
                         </p>
                       </div>
                     </div>

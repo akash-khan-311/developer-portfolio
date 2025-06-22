@@ -1,15 +1,44 @@
 'use client';
-import { TExperience } from "@/app/Interface/experience.interface";
 import { formatDate } from "@/utils/formatDate";
 import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import { ExperienceModal } from "../Modal/EditExperienceDataModal";
-import { useEffect, useState } from "react";
-const ExperienceCard = ({ data, onUpdate }) => {
+import { useState } from "react";
+import { deleteExperience } from "@/lib/deleteExperienceData";
+import { useSWRConfig } from "swr";
+import Swal from "sweetalert2";
+const ExperienceCard = ({ data, mutate }) => {
     const [modalOpen, setModalOpen] = useState(false);
-    const [experience, setExperience] = useState(data);
-    useEffect(() => {
-        setExperience(data);
-    }, [data]);
+
+    const handleDelete = async (id: string) => {
+        try {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const res = await deleteExperience(id);
+                    if (res.success) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                        await mutate()
+                    }
+
+                }
+            });
+        } catch (error) {
+
+        }
+    }
+
     return (
         <div className="border rounded-lg p-5 relative">
             <div className="">
@@ -24,16 +53,13 @@ const ExperienceCard = ({ data, onUpdate }) => {
                     <FaEdit />
                 </button>
                 <button
-
+                    onClick={() => handleDelete(data._id)}
                     className="absolute bottom-3 right-3 p-2 rounded-full bg-red-600 hover:bg-red-800"
-                    title="Edit"
+                    title="Delete"
                 >
-                    <FaEdit />
+                    <MdDelete />
                 </button>
-                <ExperienceModal onUpdate={(updatedData) => {
-                    setExperience(updatedData); 
-                    onUpdate(updatedData);     
-                }} data={data} modalOpen={modalOpen} setModalOpen={setModalOpen} />
+                <ExperienceModal mutate={mutate} data={data} modalOpen={modalOpen} setModalOpen={setModalOpen} />
             </div>
         </div>
     )

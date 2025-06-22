@@ -74,3 +74,39 @@ export async function PATCH(
     );
   }
 }
+// ✅ PATCH update experience by ID
+export async function DELETE(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = (await context.params);
+
+  try {
+    await connectDB();
+
+    if(!id) {
+      return NextResponse.json(
+        { success: false, message: 'All fields are required' },
+      );
+    }
+    const result = await Experience.findByIdAndDelete(id);
+    if (!result) {
+      return NextResponse.json(
+        { success: false, message: 'Experience not found' },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: 'Experience Deleted Successfully',
+      data: result,
+    });
+  } catch (error) {
+    console.error('Delete experience failed:', error);
+    return NextResponse.json(
+      { success: false, message: 'Something went wrong!' },
+      { status: 500 }
+    );
+  }
+}

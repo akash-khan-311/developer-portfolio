@@ -3,12 +3,15 @@ import { useEffect, useState } from "react"
 import Field from "../../shared/Form/Field"
 import { useForm } from "react-hook-form"
 import { updateExperienceData } from "@/lib/updateExperienceData"
-import { toast } from "react-toastify"
+import { useRouter } from "next/navigation"
+import Swal from "sweetalert2"
+
 type Props = {
     modalOpen: boolean;
     data: { _id: string; company: string; role: string; startDate: Date; endDate: Date };
     setModalOpen: (open: boolean) => void;
-     onUpdate: (updatedExperience: any) => void;
+    mutate: any;
+
 };
 interface ExperienceFormData {
     company: string;
@@ -19,13 +22,12 @@ interface ExperienceFormData {
 interface UpdateExperiencePayload extends ExperienceFormData {
     id: string;
 }
-export function ExperienceModal({ data, modalOpen, setModalOpen,onUpdate }: Props) {
+export function ExperienceModal({ data, modalOpen, setModalOpen, mutate }: Props) {
     const [loading, setLoading] = useState(false);
-    console.log(data)
+    const router = useRouter()
     const {
         register,
         handleSubmit,
-        control,
         reset,
         formState: { errors },
     } = useForm<{ company: string; role: string; startDate: string; endDate: string }>({
@@ -65,20 +67,42 @@ export function ExperienceModal({ data, modalOpen, setModalOpen,onUpdate }: Prop
             });
 
             if (!result.success) {
-                toast.error(result.message || 'Something went wrong');
+                Swal.fire({
+                    background: '#000',
+                    title: "Oops!",
+                    text: result.message || 'Something Went Wrong',
+                    icon: "error",
+                    confirmButtonText: 'Okay',
+                    confirmButtonColor: '#DB2777'
+                });
                 setLoading(false);
                 return;
             }
             if (result.success) {
-                toast.success(result.message || 'Experience Updated Successfully', { position: 'bottom-right' });
-                onUpdate(result.data);
+                Swal.fire({
+                     background: '#000',
+                    title: "Good Job!",
+                    text: result.message || 'Experience data Updated Successfully',
+                    icon: "success",
+                     confirmButtonText: 'Okay',
+                     confirmButtonColor: '#DB2777'
+                });
+
                 setLoading(false);
                 setModalOpen(false);
                 reset();
+                await mutate();
             }
         } catch (error) {
             console.error("Error updating experience:", error);
-            toast.error('Failed to update experience', { position: 'bottom-right' });
+
+            Swal.fire({
+                 background: '#DB2777',
+                title: "Oops!",
+                text: error.message || 'Failed to update experience',
+                icon: "error",
+                 confirmButtonText: 'Okay'
+            });
             setLoading(false);
         }
     };

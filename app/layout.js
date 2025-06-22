@@ -7,7 +7,8 @@ import "./css/card.scss";
 import "./css/globals.scss";
 import ScrollToTop from "./components/helper/scroll-to-top";
 const inter = Inter({ subsets: ["latin"] });
-
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 export const metadata = {
   title: "Portfolio of Akash Khan - Web Developer",
   description:
@@ -23,7 +24,7 @@ export default function RootLayout({ children }) {
         <header>
           <Navbar />
         </header>
-        <ToastContainer position="bottom-right" />
+      
         <main
           id="#home"
           className=""
