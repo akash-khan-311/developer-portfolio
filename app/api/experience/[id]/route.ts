@@ -74,7 +74,7 @@ export async function PATCH(
     );
   }
 }
-// ✅ PATCH update experience by ID
+
 export async function DELETE(
   req: NextRequest,
   context: { params: Promise<{ id: string }> }

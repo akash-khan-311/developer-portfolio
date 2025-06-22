@@ -25,7 +25,7 @@ const Sidebar = () => {
     return (
         <>
             {/* Small Screen Navbar */}
-            <div className="  text-gray-100 flex justify-between lg:hidden relative z-[99999]">
+            <div className="  text-gray-100 flex justify-between lg:hidden relative z-[9999999999]">
                 <button
                     onClick={handleToggle}
                     className="absolute right-0 top-0 p-4 focus:outline-none "

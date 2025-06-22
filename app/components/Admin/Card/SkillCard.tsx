@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import UpdateSkillModal from "../Modal/updateSkillModal";
 
 type Props = {
     data: {
@@ -16,6 +17,8 @@ type Props = {
 
 const SkillCard = ({ data, mutate }: Props) => {
     const [modalOpen, setModalOpen] = useState(false);
+
+    
     return (
         <div className="border rounded-lg p-5 relative">
             <div className="">
@@ -40,7 +43,8 @@ const SkillCard = ({ data, mutate }: Props) => {
                 >
                     <MdDelete />
                 </button>
-                {/* <ExperienceModal mutate={mutate} data={data} modalOpen={modalOpen} setModalOpen={setModalOpen} /> */}
+                <UpdateSkillModal mutate={mutate} data={data} modalOpen={modalOpen} setModalOpen={setModalOpen} />
+
             </div>
         </div>
 

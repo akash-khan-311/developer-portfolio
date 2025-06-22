@@ -105,7 +105,7 @@ export function ExperienceModal({ data, modalOpen, setModalOpen, mutate }: Props
         }
     };
     return (
-        <div onClick={() => setModalOpen(false)} className={`z-[999999] fixed flex items-center justify-center h-screen w-screen place-items-center ${modalOpen ? "visible opacity-1" : "invisible opacity-0"} inset-0 backdrop-blur-sm bg-black/50 duration-100 `}>
+        <div onClick={() => setModalOpen(false)} className={`z-[10] fixed flex items-center justify-center h-screen w-screen place-items-center ${modalOpen ? "visible opacity-1" : "invisible opacity-0"} inset-0 backdrop-blur-sm bg-black/50 duration-100 `}>
             <div onClick={(e) => e.stopPropagation()} className={`absolute p-5 m-4 lg:w-2/5 lg:min-w-[40%] max-w-[90%] rounded-lg bg-slate-800 font-sans text-base text-blue-gray-500 ${modalOpen ? "translate-y-6 opacity-1 duration-300" : " opacity-0 duration-200"} shadow-2xl`}>
                 <div className="">
                     <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white text-center">Update Your Experience</h1>
