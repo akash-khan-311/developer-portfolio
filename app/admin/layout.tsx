@@ -14,7 +14,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <Sidebar />
                 <ToastContainer position="top-center" />
                 <div className="flex-1 relative lg:ml-64 z-[0]">
-                    <div className="p-5">{children}</div>
+                    <div className="p-5 mt-18">{children}</div>
                 </div>
             </div>
         </>

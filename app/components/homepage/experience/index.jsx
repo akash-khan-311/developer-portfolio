@@ -60,7 +60,7 @@ async function Experience() {
                     />
                     <div className="flex justify-center">
                       <p className="text-xs sm:text-sm text-[#16f2b3]">
-                        {formatDate(experience?.startDate)} {formatDate(experience?.endDate)}
+                       ( {formatDate(experience?.startDate)} - {formatDate(experience?.endDate)} )
                       </p>
                     </div>
                     <div className="flex items-center gap-x-8 px-3 py-5">

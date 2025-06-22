@@ -9,7 +9,7 @@ const ExperienceList = () => {
   const { data, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/experience/`, fetcher, {
     revalidateOnFocus: false,
   })
-  if (error) return (<div className=" flex justify-center items-center h-[calc(100vh-100px)]">
+  if (error) return (<div className="flex justify-center items-center h-[calc(100vh-100px)]">
     <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white text-center">Something went wrong</h1>
   </div>)
 

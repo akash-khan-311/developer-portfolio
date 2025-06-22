@@ -5,7 +5,6 @@ import { MdDelete } from "react-icons/md";
 import { ExperienceModal } from "../Modal/EditExperienceDataModal";
 import { useState } from "react";
 import { deleteExperience } from "@/lib/deleteExperienceData";
-import { useSWRConfig } from "swr";
 import Swal from "sweetalert2";
 const ExperienceCard = ({ data, mutate }) => {
     const [modalOpen, setModalOpen] = useState(false);

@@ -19,9 +19,7 @@ interface ExperienceFormData {
     startDate: string;
     endDate: string;
 }
-interface UpdateExperiencePayload extends ExperienceFormData {
-    id: string;
-}
+
 export function ExperienceModal({ data, modalOpen, setModalOpen, mutate }: Props) {
     const [loading, setLoading] = useState(false);
     const router = useRouter()
