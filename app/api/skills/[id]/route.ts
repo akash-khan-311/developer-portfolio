@@ -28,7 +28,6 @@ export async function DELETE(
     return NextResponse.json({
       success: true,
       message: 'Skill Deleted Successfully',
-      data: result,
     });
   } catch (error) {
     console.error('Skill Deleted failed:', error);

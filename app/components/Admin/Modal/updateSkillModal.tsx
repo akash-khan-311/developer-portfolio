@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import Field from "../../shared/Form/Field";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
+import { updateSkill } from "@/lib/updateSkill";
+import Swal from "sweetalert2";
 
 type Props = {
     mutate: () => Promise<unknown>;
@@ -17,7 +20,7 @@ type Props = {
 };
 const UpdateSkillModal = ({ data, modalOpen, setModalOpen, mutate }: Props) => {
     const [loading, setLoading] = useState(false);
-     // ! in from when the user upload the profile image and show the preview
+    // ! in from when the user upload the profile image and show the preview
     const [previewImage, setPreviewImage] = useState(
         "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Images.png"
     );
@@ -45,11 +48,46 @@ const UpdateSkillModal = ({ data, modalOpen, setModalOpen, mutate }: Props) => {
         reset({
             name: data?.name,
             icon: data?.icon,
+
         })
+        setPreviewImage(data.icon)
     }, [reset, data])
 
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (formData: any) => {
+        try {
+            setLoading(true)
+            const id = data._id
+            console.log(id)
+            const imageURL = await uploadImageToCloudinary(formData.icon[0]);
+            const payload = {
+                name: data.name,
+                icon: imageURL
+            }
 
+            const result: { success: boolean; message?: string } = await updateSkill({ id, payload });
+            console.log(result)
+            if (result.success) {
+                Swal.fire({
+                    background: '#000',
+                    title: "Good Job!",
+                    text: result.message || 'Skill Successfully Updated',
+                    icon: "success",
+                    confirmButtonText: 'Okay',
+                    confirmButtonColor: '#DB2777'
+                });
+                await mutate();
+                reset();
+                setModalOpen(false);
+                setLoading(false);
+            }
+        } catch (error) {
+
+            console.log('error', error);
+
+        }
+        finally {
+            setLoading(false)
+        }
     }
     return (
         <div onClick={() => setModalOpen(false)} className={`z-[999999] fixed flex items-center justify-center h-screen w-screen place-items-center ${modalOpen ? "visible opacity-1" : "invisible opacity-0"} inset-0 backdrop-blur-sm bg-black/50 duration-100 `}>
@@ -66,11 +104,11 @@ const UpdateSkillModal = ({ data, modalOpen, setModalOpen, mutate }: Props) => {
                                     })} type='text' id="name" name="name" className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
                                 </Field>
                             </div>
-                             <div className="flex flex-col lg:flex-row-reverse justify-between items-center mt-5 gap-x-10">
+                            <div className="flex flex-col lg:flex-row-reverse justify-between items-center mt-5 gap-x-10">
                                 <Image
                                     id="preview_img"
                                     className="h-32 w-32 object-cover border-2 p-1 rounded-full"
-                                    src={data?.icon || previewImage}
+                                    src={previewImage}
                                     alt="Preview"
                                     width={100}
                                     height={100}

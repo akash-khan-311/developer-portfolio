@@ -51,7 +51,7 @@ const AddSkillsModal = ({ modalOpen, setModalOpen, mutate }: Props) => {
                             <div>
                                 <Field htmlFor="icon" label="Skill Icon" required error={errors.icon}>
                                     <input  {...register("icon", {
-                                        required: "Role is required",
+                                        required: "Skill Icon is required",
                                     })} type='text' id="icon" name="icon" className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
                                 </Field>
                             </div>
