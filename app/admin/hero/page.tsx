@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 import { getHeroData } from '@/lib/getHeroData';
 import Field from '@/app/components/shared/Form/Field';
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import Image from 'next/image';
-import { uploadImageToCloudinary } from '@/utils/uploadImageToCloudinary';
 import { updateHeroData } from '@/lib/updateHeroData';
 import Loader from '@/app/components/shared/Loader';
 import { THero } from '@/app/Interface/hero.interface';

@@ -31,7 +31,7 @@ const AddSkillsModal = ({ modalOpen, setModalOpen, mutate }: Props) => {
         });
 
         const onSubmit = async (data: any) => {
-            
+            console.log(data)
         }
   return (
      <div onClick={() => setModalOpen(false)} className={`z-[999999] fixed flex items-center justify-center h-screen w-screen place-items-center ${modalOpen ? "visible opacity-1" : "invisible opacity-0"} inset-0 backdrop-blur-sm bg-black/50 duration-100 `}>
