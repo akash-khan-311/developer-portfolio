@@ -52,3 +52,17 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function GET(req: NextRequest) {
+  await connectDB();
+  try {
+    const data = await Project.find({}).lean();
+    return NextResponse.json({status: 200 , success: true, message: 'Projects Fetched', data });
+  } catch (error) {
+    console.error('Project Create failed:', error);
+    return NextResponse.json(
+      { error: 'Something went wrong!' },
+      { status: 500 }
+    );
+  }
+}

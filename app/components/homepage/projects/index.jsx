@@ -1,7 +1,13 @@
-import { projectsData } from "@/utils/data/projects-data";
-import ProjectCard from "./project-card";
 
-const Projects = () => {
+import ProjectCard from "./project-card";
+import { getProjectData } from "@/lib/getProjectData";
+
+const Projects = async() => {
+  const result = await getProjectData();
+  let projectsData ;
+  if(result.success){
+     projectsData = result?.data
+  }
   return (
     <section id="projects" className="relative z-50  my-12 lg:my-24">
       <div className="sticky top-10">
@@ -20,7 +26,7 @@ const Projects = () => {
             <div
               id={`sticky-card-${index + 1}`}
               key={index}
-              className="sticky-card w-full mx-auto max-w-2xl sticky"
+              className="sticky-card w-full mx-auto  sticky"
             >
               <div className="box-border flex items-center justify-center rounded shadow-[0_0_30px_0_rgba(0,0,0,0.3)] transition-all duration-[0.5s]">
                 <ProjectCard project={project} />
