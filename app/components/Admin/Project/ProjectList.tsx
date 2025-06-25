@@ -3,10 +3,11 @@ import { useState } from "react";
 import useSWR from "swr";
 import Loader from "../../shared/Loader";
 import AddProjectForm from "../Form/AddProjectForm";
+import ProjectCard from "../Card/ProjectCard";
 const fetcher = (url: string) => fetch(url).then(res => res.json())
 const ProjectList = () => {
   
-  const { data, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/skills/`, fetcher, {
+  const { data, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/`, fetcher, {
     revalidateOnFocus: false,
   })
  
@@ -15,6 +16,8 @@ const ProjectList = () => {
   </div>)
 
   if (!data) return <Loader />
+
+  const projectData = data?.data
   return (
     <div className="">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white text-center">Did you complete a Project ? </h1>
@@ -26,11 +29,11 @@ const ProjectList = () => {
       <div className="mt-10">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white text-center">Your Added Project Here </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-          {/* {
-            experienceData?.map((data: { _id: string; company: string, role: string; endDate: string, startDate: string }) => (
-              <ExperienceCard key={data._id} data={data}  mutate={mutate}/>
+          {
+            projectData?.map((data: { _id: string; company: string, role: string; endDate: string, startDate: string }) => (
+              <ProjectCard key={data._id} data={data}  mutate={mutate}/>
             ))
-          } */}
+          }
         </div>
 
       </div>

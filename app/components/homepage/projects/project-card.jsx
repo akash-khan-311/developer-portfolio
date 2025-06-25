@@ -1,4 +1,3 @@
-// @flow strict
 
 import Image from 'next/image'
 import Link from 'next/link';
@@ -51,8 +50,7 @@ function ProjectCard({ project }) {
             <Link
               href={codeLink}
               target="_blank"
-              className=" text-white  uppercase bg-pink-600 py-2 px-8 rounded-md text-sm"
-            >
+              className=" text-white  uppercase bg-pink-600 py-2 px-8 rounded-md text-sm">
               Code Link
             </Link>
           </div>
