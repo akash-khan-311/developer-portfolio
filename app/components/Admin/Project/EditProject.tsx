@@ -5,11 +5,16 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import Field from "../../shared/Form/Field";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
+import { updateProjectData } from "@/lib/updateProjectData";
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { useRouter } from "next/navigation";
 
-const EditProject = ({ project }: { project: TProject }) => {
+const EditProject = ({ project }: any) => {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [techInput, setTechInput] = useState('');
   const [tech, setTech] = useState<string[]>([]);
+  const router = useRouter();
   // ! in from when the user upload the profile image and show the preview
   const [previewImage, setPreviewImage] = useState(
     "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Images.png"
@@ -76,7 +81,56 @@ const EditProject = ({ project }: { project: TProject }) => {
     setValue('technologies', updated);
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (formData) => {
+    if (tech.length < 2) {
+      setError('technologies', {
+        type: 'manual',
+        message: 'At least two technology  is required',
+      });
+      return;
+    }
+    try {
+      setSubmitLoading(true);
+      console.log(project)
+      const id = project._id
+      const imgUrl = await uploadImageToCloudinary(formData.image[0]);
+
+      const payload = {
+        title: formData.title,
+        description: formData.description,
+        codeLink: formData.codeLink,
+        liveLink: formData.liveLink,
+        image: imgUrl,
+        technologies: tech,
+      };
+      
+      const result = await updateProjectData({ id, payload });
+      console.log(result)
+      if (result.success) {
+        Swal.fire({
+          background: '#000',
+          title: "Good Job!",
+          text: result.message || 'Project Successfully Updated',
+          icon: "success",
+          confirmButtonText: 'Okay',
+          confirmButtonColor: '#DB2777'
+        });
+        router.refresh()
+        reset();
+        setSubmitLoading(false);
+        setPreviewImage(result?.data?.image)
+
+      }
+
+
+
+    } catch (error) {
+      console.log('error', error);
+
+    }
+    finally {
+      setSubmitLoading(false);
+    }
 
   }
 

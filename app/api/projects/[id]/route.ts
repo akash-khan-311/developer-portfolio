@@ -3,12 +3,11 @@ import Experience from '@/app/models/Experience.model';
 import Project from '@/app/models/project.model';
 import { NextRequest, NextResponse } from 'next/server';
 
-
 export async function GET(
   req: NextRequest,
-  context: { params: Promise<{ id: string }> } 
+  context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = (await context.params);
+  const { id } = await context.params;
   try {
     await connectDB();
     const project = await Project.findById(id).lean();
@@ -35,14 +34,22 @@ export async function PATCH(
   req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = (await context.params);
+  const { id } = await context.params;
 
   try {
     await connectDB();
     const body = await req.json();
-    const payload = body;
-
-    if (payload === null) {
+    const { payload } = body;
+    console.log('Received Payload:', payload);
+    if (
+      !payload ||
+      !payload.title ||
+      !payload.description ||
+      !payload.image ||
+      !payload.codeLink ||
+      !payload.liveLink ||
+      !payload.technologies
+    ) {
       return NextResponse.json(
         { success: false, message: 'All fields are required' },
         { status: 400 }
@@ -51,7 +58,7 @@ export async function PATCH(
 
     const updatedProject = await Project.findByIdAndUpdate(
       id,
-     payload,
+      { $set: payload },
       { new: true }
     );
 
@@ -80,15 +87,16 @@ export async function DELETE(
   req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = (await context.params);
+  const { id } = await context.params;
 
   try {
     await connectDB();
 
-    if(!id) {
-      return NextResponse.json(
-        { success: false, message: 'All fields are required' },
-      );
+    if (!id) {
+      return NextResponse.json({
+        success: false,
+        message: 'All fields are required',
+      });
     }
     const result = await Project.findByIdAndDelete(id);
     if (!result) {
