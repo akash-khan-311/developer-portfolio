@@ -1,6 +1,9 @@
+import EducationList from "@/app/components/Admin/Education/EducationList"
+
+
 const EducationPage = ()=> {
     return (
-        <div>This is Education page</div>
+       <EducationList/>
     )
 }
 
