@@ -1,13 +1,23 @@
 // @flow strict
-import Image from "next/image";
+import Image from 'next/image';
+import { BsPersonWorkspace } from 'react-icons/bs';
+import AnimationLottie from '../../helper/animation-lottie';
+import GlowCard from '../../helper/glow-card';
+import lottieFile from '/public/lottie/study.json';
+import { getEducationData } from '@/lib/getEducationData';
+import { formatDate } from '@/utils/formatDate';
 
-import { educations } from "@/utils/data/educations";
-import { BsPersonWorkspace } from "react-icons/bs";
-import AnimationLottie from "../../helper/animation-lottie";
-import GlowCard from "../../helper/glow-card";
-import lottieFile from "/public/lottie/study.json";
-
-function Education() {
+async function Education() {
+  const result = await getEducationData();
+  console.log(result);
+  if (!result.success) {
+    return (
+      <div className="flex justify-center items-center">
+        <h1 className="text-3xl font-bold text-white">{result.message}</h1>
+      </div>
+    );
+  }
+  const educations = result.data;
   return (
     <section
       id="education"
@@ -47,10 +57,7 @@ function Education() {
           <div>
             <div className="flex flex-col gap-6">
               {educations.map((education) => (
-                <GlowCard
-                  key={education.id}
-                  identifier={`education-${education.id}`}
-                >
+                <GlowCard key={education._id} identifier={`${education._id}`}>
                   <div className="p-3 relative text-white">
                     <Image
                       src="/blur-23.svg"
@@ -61,7 +68,8 @@ function Education() {
                     />
                     <div className="flex justify-center">
                       <p className="text-xs sm:text-sm text-[#16f2b3]">
-                        {education.duration}
+                        {formatDate(education.admitYear)} -{' '}
+                        {formatDate(education.passYear)}
                       </p>
                     </div>
                     <div className="flex items-center gap-x-8 px-3 py-5">
@@ -70,10 +78,10 @@ function Education() {
                       </div>
                       <div>
                         <p className="text-base sm:text-xl mb-2 font-medium uppercase">
-                          {education.title}
+                          {education.degree}
                         </p>
-                        <p className="text-sm sm:text-base">
-                          {education.institution}
+                        <p className="text-sm sm:text-base capitalize">
+                          {education.school}
                         </p>
                       </div>
                     </div>

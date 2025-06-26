@@ -99,20 +99,19 @@ const CreateEducationModal = ({ modal, setModal, mutate }: Props) => {
                                 </Field>
                             </div>
                             <div>
-                                <Field htmlFor="passYear" label="Pass Year" required error={errors.passYear}>
-                                    <input  {...register("passYear", {
-                                        required: "Please Add Your Pass Year",
-                                    })} type='date' id="passYear" name="passYear" className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
-                                </Field>
-                            </div>
-                            <div>
                                 <Field htmlFor="admitYear" label="Admit Year" required error={errors.admitYear}>
                                     <input  {...register("admitYear", {
                                         required: "Please Add Your Admit Year",
                                     })} type='date' id="admitYear" name="admitYear" className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
                                 </Field>
                             </div>
-
+                            <div>
+                                <Field htmlFor="passYear" label="Pass Year" required error={errors.passYear}>
+                                    <input  {...register("passYear", {
+                                        required: "Please Add Your Pass Year",
+                                    })} type='date' id="passYear" name="passYear" className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
+                                </Field>
+                            </div>
                             <div className="flex justify-between items-center mt-6">
                                 <button type="submit" className="px-8 py-2 mr-1 bg-green-600 font-sans text-xs font-bold text-white uppercase transition-all rounded-lg ">
                                     {loading ? 'Loading.....' : 'Add Education'}

@@ -1,37 +1,37 @@
-import { FlipWords } from "@/components/ui/flip-words";
-import { getHeroData } from "@/lib/getHeroData";
-import { personalData } from "@/utils/data/personal-data";
-import Link from "next/link";
-import { BsGithub, BsLinkedin } from "react-icons/bs";
-import { FaFacebook, FaTwitterSquare } from "react-icons/fa";
-import { MdDownload } from "react-icons/md";
-import { RiContactsFill } from "react-icons/ri";
-export const dynamic = "force-dynamic";
-async function  HeroSection() {
+import { FlipWords } from '@/components/ui/flip-words';
+import { getHeroData } from '@/lib/getHeroData';
+import { personalData } from '@/utils/data/personal-data';
+import Link from 'next/link';
+import { BsGithub, BsLinkedin } from 'react-icons/bs';
+import { FaFacebook, FaTwitterSquare } from 'react-icons/fa';
+import { MdDownload } from 'react-icons/md';
+import { RiContactsFill } from 'react-icons/ri';
+export const dynamic = 'force-dynamic';
+async function HeroSection() {
   const data = await getHeroData();
 
   const hero = data?.data;
-console.log(hero)
-console.log(hero.name)
 
   return (
     <section
       id="/"
       className={`relative  overflow-hidden  py-4 lg:py-12 flex items-center justify-center  bg-[url('https://res.cloudinary.com/dtvnmf35l/image/upload/v1750328342/jlcm8kzjp4py3hespkgp.jpg')] bg-no-repeat bg-right bg-contain h-screen w-full `}
     >
-
       <div className="flex flex-col z-50 justify-start items-start lg:flex-row lg:gap-12 gap-y-8 container mx-auto">
         <div className="w-full flex flex-col items-start justify-start p-2 pb-20 md:pb-10 lg:pt-10">
           <h1 className="text-3xl lg:text-[72px] font-bold text-white md:font-extrabold  lg:leading-[5.5rem]">
             Assalamu alaikum, <br />
             This is
             <span>
-              <FlipWords words={([hero?.name] || ["Akash Khan"])} />
+              <FlipWords words={[hero?.name] || ['Akash Khan']} />
             </span>
             <br />
             <span className=" text-white">
               {`I'm a `}
-              <FlipWords words={hero?.slug || ["Frontend Developer"]} className="text-[#16f2b3]" />
+              <FlipWords
+                words={hero?.slug || ['Frontend Developer']}
+                className="text-[#16f2b3]"
+              />
             </span>
           </h1>
 
@@ -89,7 +89,6 @@ console.log(hero.name)
             </Link>
           </div>
         </div>
-       
       </div>
     </section>
   );
