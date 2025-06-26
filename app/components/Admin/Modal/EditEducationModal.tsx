@@ -6,6 +6,7 @@ import { updateExperienceData } from "@/lib/updateExperienceData"
 import { useRouter } from "next/navigation"
 import Swal from "sweetalert2"
 import { TEducation } from "@/app/Interface/education.interface"
+import { updateEducation } from "@/lib/updateEducation"
 
 type Props = {
   modalOpen: boolean;
@@ -55,21 +56,21 @@ export function EducationModal({ data, modalOpen, setModalOpen, mutate }: Props)
     try {
       setLoading(true);
       const id: string = data._id;
-
-
-      console.log(payload)
-      // if (!result.success) {
-      //   Swal.fire({
-      //     background: '#000',
-      //     title: "Oops!",
-      //     text: result.message || 'Something Went Wrong',
-      //     icon: "error",
-      //     confirmButtonText: 'Okay',
-      //     confirmButtonColor: '#DB2777'
-      //   });
-      //   setLoading(false);
-      //   return;
-      // }
+      const result = await updateEducation(id, payload);
+      if (result.success) {
+        Swal.fire({
+          background: '#000',
+          title: "Good Job!",
+          text: result.message || 'Education Successfully Updated',
+          icon: "success",
+          confirmButtonText: 'Okay',
+          confirmButtonColor: '#DB2777'
+        });
+        await mutate();
+        reset();
+        setModalOpen(false);
+        setLoading(false);
+      }
 
     } catch (error) {
       console.error("Error updating experience:", error);
@@ -81,6 +82,9 @@ export function EducationModal({ data, modalOpen, setModalOpen, mutate }: Props)
         icon: "error",
         confirmButtonText: 'Okay'
       });
+      setLoading(false);
+    }
+    finally {
       setLoading(false);
     }
   };

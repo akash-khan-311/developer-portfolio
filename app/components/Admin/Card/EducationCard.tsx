@@ -7,6 +7,7 @@ import { useState } from "react";
 import { deleteExperience } from "@/lib/deleteExperienceData";
 import Swal from "sweetalert2";
 import { EducationModal } from "../Modal/EditEducationModal";
+import { deleteEducationFromDB } from "@/lib/deleteEducation";
 const EducationCard = ({ data, mutate }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -22,7 +23,7 @@ const EducationCard = ({ data, mutate }) => {
         confirmButtonText: "Yes, delete it!"
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await deleteExperience(id);
+          const res = await deleteEducationFromDB(id);
           if (res.success) {
             Swal.fire({
               title: "Deleted!",
@@ -35,7 +36,7 @@ const EducationCard = ({ data, mutate }) => {
         }
       });
     } catch (error) {
-
+      console.error("Error deleting experience:", error);
     }
   }
 
