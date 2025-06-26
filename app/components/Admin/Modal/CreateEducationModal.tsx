@@ -22,8 +22,8 @@ const CreateEducationModal = ({ modal, setModal, mutate }: Props) => {
         defaultValues: {
             school: "",
             degree: "",
-            admitYear: "",
-            passYear: "",
+            admitYear: new Date(),
+            passYear: new Date(),
 
         },
     });
@@ -91,6 +91,10 @@ const CreateEducationModal = ({ modal, setModal, mutate }: Props) => {
                                 <Field htmlFor="degree" label="Degree" required error={errors.degree}>
                                     <input  {...register("degree", {
                                         required: "Degree is required",
+                                        minLength: {
+                                            value: 10,
+                                            message: 'Degree must be at least 10 characters long'
+                                        }
                                     })} type='text' id="degree" name="degree" className='w-full px-3 py-2 border bg-slate-900 border-gray-300 rounded-md focus:outline-none focus:border-blue-500' />
                                 </Field>
                             </div>

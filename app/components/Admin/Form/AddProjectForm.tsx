@@ -111,7 +111,7 @@ const AddProjectForm = ({ mutate }: any) => {
         text: "Something went wrong",
         icon: "error"
       })
-    }finally {
+    } finally {
       setSubmitLoading(false);
     }
 

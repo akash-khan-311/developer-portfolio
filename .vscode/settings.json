@@ -1,0 +1,23 @@
+{
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.next": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/*": true,
+    "**/.next/*": true
+  },
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "editor.formatOnSave": true,
+  "prettier.enable": true,
+  "eslint.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source.fixAll.eslint": "always"
+  },
+  "explorer.excludeGitIgnore": true
+}

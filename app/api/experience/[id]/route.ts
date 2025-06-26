@@ -2,12 +2,11 @@ import { connectDB } from '@/app/lib/db';
 import Experience from '@/app/models/Experience.model';
 import { NextRequest, NextResponse } from 'next/server';
 
-// ✅ GET single experience by ID
 export async function GET(
   req: NextRequest,
-  context: { params: Promise<{ id: string }> } // ✅ NOT Promise
+  context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = (await context.params);
+  const { id } = await context.params;
   try {
     await connectDB();
     const experience = await Experience.findById(id).lean();
@@ -34,7 +33,7 @@ export async function PATCH(
   req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = (await context.params);
+  const { id } = await context.params;
 
   try {
     await connectDB();
@@ -79,15 +78,16 @@ export async function DELETE(
   req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = (await context.params);
+  const { id } = await context.params;
 
   try {
     await connectDB();
 
-    if(!id) {
-      return NextResponse.json(
-        { success: false, message: 'All fields are required' },
-      );
+    if (!id) {
+      return NextResponse.json({
+        success: false,
+        message: 'All fields are required',
+      });
     }
     const result = await Experience.findByIdAndDelete(id);
     if (!result) {

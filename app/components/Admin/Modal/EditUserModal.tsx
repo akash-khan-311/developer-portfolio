@@ -35,7 +35,7 @@ const EditUserModal = ({
   };
 
   return (
-    <div className=" inset-0 z-50 bg-black/50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
       <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 p-6 rounded-xl w-[90%] max-w-lg space-y-4">
         <h2 className="text-xl font-bold text-center">Edit Information</h2>
 
