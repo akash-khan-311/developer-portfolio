@@ -1,13 +1,12 @@
 // @flow strict
 
-import { getSkillData } from "@/lib/getSkillData";
-import { skillsImage } from "@/utils/skill-image";
-import Image from "next/image";
-import Marquee from "react-fast-marquee";
+import { getSkillData } from '@/lib/getSkillData';
+import Image from 'next/image';
+import Marquee from 'react-fast-marquee';
 
 async function Skills() {
   const result = await getSkillData();
-  const skillsData = result?.data
+  const skillsData = result?.data;
   return (
     <section
       id="skills"

@@ -1,18 +1,16 @@
-"use client";
+'use client';
 // @flow strict
-import { isValidEmail } from "@/utils/check-email";
-import axios from "axios";
-import { useState } from "react";
-import { TbMailForward } from "react-icons/tb";
-import { toast } from "react-toastify";
+import { isValidEmail } from '@/utils/check-email';
+import { useState } from 'react';
+import { TbMailForward } from 'react-icons/tb';
 
 function ContactForm() {
   const [error, setError] = useState({ email: false, required: false });
   const [isLoading, setIsLoading] = useState(false);
   const [userInput, setUserInput] = useState({
-    name: "",
-    email: "",
-    message: "",
+    name: '',
+    email: '',
+    message: '',
   });
 
   const checkRequired = () => {
@@ -34,14 +32,14 @@ function ContactForm() {
     }
 
     try {
-      console.log("Message sent successfully!");
+      console.log('Message sent successfully!');
       setUserInput({
-        name: "",
-        email: "",
-        message: "",
+        name: '',
+        email: '',
+        message: '',
       });
     } catch (error) {
-      console.error("Failed to send message!");
+      console.error('Failed to send message!');
     } finally {
       setIsLoading(false);
     }
