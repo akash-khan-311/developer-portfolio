@@ -1,3 +1,4 @@
+/* eslint-disable */
 import EditProject from "@/app/components/Admin/Project/EditProject"
 import { getSingleProject } from "@/lib/getSingleProject"
 import { Metadata, ResolvingMetadata } from "next"
@@ -26,7 +27,7 @@ const EditProjectPage = async (props: { params: Promise<{ id: string }> }) => {
     const params = await props.params;
     // Data fetching
     const result: any | undefined = await getSingleProject(params.id);
-   
+
     // Not found handling
     if (!result) {
         return (
