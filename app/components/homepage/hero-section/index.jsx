@@ -1,11 +1,9 @@
 import { FlipWords } from '@/components/ui/flip-words';
 import { getHeroData } from '@/lib/getHeroData';
-import { personalData } from '@/utils/data/personal-data';
 import Link from 'next/link';
-import { BsGithub, BsLinkedin } from 'react-icons/bs';
-import { FaFacebook, FaTwitterSquare } from 'react-icons/fa';
 import { MdDownload } from 'react-icons/md';
 import { RiContactsFill } from 'react-icons/ri';
+import SocialLink from '../../shared/SocialLink';
 export const dynamic = 'force-dynamic';
 async function HeroSection() {
   const data = await getHeroData();
@@ -35,36 +33,8 @@ async function HeroSection() {
             </span>
           </h1>
 
-          <div className="my-12 flex items-center gap-5">
-            <Link
-              href={hero?.socialLinks?.github}
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <BsGithub size={30} />
-            </Link>
-            <Link
-              href={hero?.socialLinks?.linkedin}
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <BsLinkedin size={30} />
-            </Link>
-            <Link
-              href={hero?.socialLinks?.facebook}
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <FaFacebook size={30} />
-            </Link>
-
-            <Link
-              href={hero?.socialLinks?.twitter}
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <FaTwitterSquare size={30} />
-            </Link>
+          <div className="my-10">
+            <SocialLink data={hero} />
           </div>
 
           <div className="flex items-center gap-3">
