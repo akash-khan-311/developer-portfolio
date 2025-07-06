@@ -1,5 +1,6 @@
 'use client'
-import { useScroll, motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
+
 const ScrollLoader = () => {
   const scrollYProgress = useScroll().scrollYProgress
   return (
