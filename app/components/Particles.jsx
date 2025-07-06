@@ -1,7 +1,7 @@
-"use client";
-import { useEffect, useMemo, useState } from "react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
+'use client';
+import { useEffect, useMemo, useState } from 'react';
+import Particles, { initParticlesEngine } from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim';
 
 const ParticlesComponent = () => {
   const [init, setInit] = useState(false);
@@ -22,11 +22,11 @@ const ParticlesComponent = () => {
         events: {
           onClick: {
             enable: false,
-            mode: "push",
+            mode: 'push',
           },
           onHover: {
             enable: true,
-            mode: "repulse",
+            mode: 'repulse',
           },
         },
         modes: {
@@ -41,20 +41,20 @@ const ParticlesComponent = () => {
       },
       particles: {
         color: {
-          value: "#DB2777",
+          value: '#DB2777',
         },
         links: {
-          color: "#16f2b3",
+          color: '#16f2b3',
           distance: 120,
           enable: true,
           opacity: 0.5,
           width: 1,
         },
         move: {
-          direction: "none",
+          direction: 'none',
           enable: true,
           outModes: {
-            default: "bounce",
+            default: 'bounce',
           },
           random: false,
           speed: 3,
@@ -64,13 +64,13 @@ const ParticlesComponent = () => {
           density: {
             enable: true,
           },
-          value: 150,
+          value: 100,
         },
         opacity: {
           value: 0.5,
         },
         shape: {
-          type: "circle",
+          type: 'circle',
         },
         size: {
           value: { min: 1, max: 3 },
