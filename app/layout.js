@@ -25,10 +25,8 @@ export default function RootLayout({ children }) {
         <header>
           <Navbar />
         </header>
-        <main data-scroll-container id="#home" className="">
-          {children}
-          <ScrollToTop />
-        </main>
+        <>{children}</>
+        <ScrollToTop />
         <Footer />
       </body>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />

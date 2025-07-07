@@ -11,7 +11,7 @@ import ScrollLoader from './components/ScrollLoader/ScrollLoader';
 
 export default async function Home() {
   return (
-    <>
+    <main>
       <ScrollLoader />
       <HeroSection />
       <div className="py-0 my-0 relative container mx-auto">
@@ -23,6 +23,6 @@ export default async function Home() {
         <Education />
         <ContactSection />
       </div>
-    </>
+    </main>
   );
 }
