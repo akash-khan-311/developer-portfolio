@@ -9,6 +9,7 @@ import ScrollToTop from './components/helper/scroll-to-top';
 const inter = Inter({ subsets: ['latin'] });
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
+import Preloader from '@/components/PreLoader';
 
 export const metadata = {
   title: 'Portfolio of Akash Khan - Web Developer',
@@ -22,12 +23,14 @@ export default function RootLayout({ children }) {
   return (
     <html className="scroll-smooth" lang="en">
       <body className={`${inter.className} bg-[#030400]`}>
-        <header>
-          <Navbar />
-        </header>
-        <>{children}</>
-        <ScrollToTop />
-        <Footer />
+        <Preloader>
+          <header>
+            <Navbar />
+          </header>
+          <>{children}</>
+          <ScrollToTop />
+          <Footer />
+        </Preloader>
       </body>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
     </html>
