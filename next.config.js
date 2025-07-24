@@ -1,4 +1,7 @@
 const path = require('path');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 module.exports = {
   sassOptions: {
@@ -8,7 +11,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**', 
+        hostname: '**',
       },
       {
         protocol: 'https',

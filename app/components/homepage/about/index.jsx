@@ -1,13 +1,13 @@
 // @flow strict
 
-import { FlipWords } from "@/components/ui/flip-words";
-import { getAboutData } from "@/lib/getAboutData";
-import { personalData } from "@/utils/data/personal-data";
-import Image from "next/image";
+import { FlipWords } from '@/components/ui/flip-words';
+import { getAboutData } from '@/lib/getAboutData';
+import { personalData } from '@/utils/data/personal-data';
+import Image from 'next/image';
 
 async function AboutSection() {
   const data = await getAboutData();
- const {description,profileImage} =  data.data;
+  const { description, profileImage } = data.data;
   return (
     <section id="about" className="my-12 lg:my-16 relative">
       <div className="hidden lg:flex flex-col items-center absolute top-16 -right-8">
@@ -19,7 +19,7 @@ async function AboutSection() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
         <div className="order-2 lg:order-1">
           <p className="font-medium mb-5  text-xl uppercase">
-            <FlipWords className="text-[#16f2b3]" words={["Who I am"]} />
+            <FlipWords className="text-[#16f2b3]" words={['Who I am']} />
           </p>
           <p className=" text-sm lg:text-lg">
             <FlipWords
@@ -34,6 +34,7 @@ async function AboutSection() {
             src={profileImage}
             width={280}
             height={280}
+            loading="lazy"
             alt="Akash Khan"
             className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
           />

@@ -78,7 +78,7 @@ const Preloader = ({ children }: { children: React.ReactNode }) => {
       )}
 
       <div
-        className={`transition-opacity duration-700 ${done ? "opacity-100" : "opacity-0 pointer-events-none"
+        className={`transition-opacity duration-700 ${done ? "opacity-100" : "opacity-0 pointer-events-none  z-40"
           }`}
       >
         {children}
