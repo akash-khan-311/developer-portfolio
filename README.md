@@ -1,72 +1,36 @@
-# 🚀 Personal Portfolio Website
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-This is my personal portfolio website, built using **Next.js**. It showcases my skills, projects, and experiences as a Junior MERN Stack Developer.
+## Getting Started
 
----
+First, run the development server:
 
-## 🌟 Features
-
-- **Responsive Design:** Fully optimized for all screen sizes, from desktops to mobile devices.
-- **Modern UI:** Built with a clean and elegant user interface using **Tailwind CSS**.
-- **Projects Section:** Showcasing my notable projects with descriptions and links to GitHub repositories or live demos.
-- **About Me:** Highlights my skills, journey, and interests.
-- **Contact Form:** Allows visitors to reach out to me directly.
-- **Fast and SEO-friendly:** Leveraging Next.js for server-side rendering and improved performance.
-
----
-
-## 🛠️ Technologies Used
-
-- **Framework:** [Next.js](https://nextjs.org/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Icons:** [Heroicons](https://heroicons.com/)
-- **Deployment:** Hosted on [Vercel](https://vercel.com/)
-
----
-
-## 📂 Project Structure
-
-```plaintext
-📁 my-portfolio
-├── 📁 app
-├── 📁 public          # Static assets (images, favicon, etc.)
-├── 📁 components      # Reusable React components          # Next.js pages (routes)
-├── 📄 next.config.js  # Next.js configuration file
-└── 📄 package.json    # Project dependencies and scripts
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## 🌐 Live Demo
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Check out the live version of my portfolio:
-[My Portfolio](https://akash-khan-2.vercel.app/)
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## 📧 Contact
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-Feel free to reach out to me for collaboration or inquiries:
+## Learn More
 
-- **Name:** Akash Khan
-- **Email:** [mdakashkhanbdinto@gmail.com](mailto:mdakashkhanbdinto@gmail.com))
-- **Phone:** +880 171-968 1150
-- **LinkedIn:** [Linkedin](https://www.linkedin.com/in/md-akash-ali-9585a02a0/)
-- **GitHub:** [@akash-khan-311](https://github.com/akash-khan-311)
-- **Twitter:** [@AkashKhan334](https://x.com/AkashKhan334)
+To learn more about Next.js, take a look at the following resources:
 
-## Clone and Customize
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-If you like this portfolio and want to use it for your own purposes, feel free to clone the repository and make changes to fit your needs. Follow these steps to get started:
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### Steps to Clone and Use
+## Deploy on Vercel
 
-1. **Clone the repository**:
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-   ```bash
-   git clone https://github.com/akash-khan-311/developer-portfolio.git
-   ```
-
-   ```bash
-   cd developer-portfolio
-   ```
-
-   ```bash
-   npm install
-   ```
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
