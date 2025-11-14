@@ -5,11 +5,11 @@ import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import experience from "/public/lottie/code.json";
 import { getExperienceData } from "@/lib/getExperienceData";
-import { formatDate } from '@/utils/formatDate';
+import { formatDate } from "@/utils/formatDate";
 
 async function Experience() {
-  const result = await getExperienceData()
-  console.log('this is for expericen index',result)
+  const result = await getExperienceData();
+  console.log("this is for expericen index", result);
 
   const experiences = result?.data || [];
   return (
@@ -26,7 +26,7 @@ async function Experience() {
       />
 
       <div className="flex justify-center my-5 lg:py-8">
-        <div className="flex  items-center">
+        <div className="flex items-center">
           <span className="w-24 h-[2px] bg-[#1a1443]"></span>
           <span className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md">
             Experiences
@@ -36,8 +36,8 @@ async function Experience() {
       </div>
 
       <div className="py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-          <div className="flex justify-center items-start">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
+          <div className="flex items-start justify-center">
             <div className="w-full h-full">
               <AnimationLottie animationPath={experience} />
             </div>
@@ -50,7 +50,7 @@ async function Experience() {
                   key={experience?._id}
                   identifier={`experience-${experience?._id}`}
                 >
-                  <div className="p-3 relative">
+                  <div className="relative p-3">
                     <Image
                       src="/blur-23.svg"
                       alt="Hero"
@@ -60,15 +60,19 @@ async function Experience() {
                     />
                     <div className="flex justify-center">
                       <p className="text-xs sm:text-sm text-[#16f2b3]">
-                       ( {formatDate(experience?.startDate)} - {formatDate(experience?.endDate)} )
+                        ( {formatDate(experience?.startDate)} -{" "}
+                        {experience?.endDate === Date
+                          ? formatDate(experience?.endDate)
+                          : "Present"}{" "}
+                        )
                       </p>
                     </div>
-                    <div className="flex items-center gap-x-8 px-3 py-5">
-                      <div className="text-violet-500  transition-all duration-300 hover:scale-125">
+                    <div className="flex items-center px-3 py-5 gap-x-8">
+                      <div className="transition-all duration-300 text-violet-500 hover:scale-125">
                         <BsPersonWorkspace size={36} />
                       </div>
                       <div>
-                        <p className="text-base sm:text-xl mb-2 font-medium uppercase">
+                        <p className="mb-2 text-base font-medium uppercase sm:text-xl">
                           {experience?.role}
                         </p>
                         <p className="text-sm sm:text-base">
